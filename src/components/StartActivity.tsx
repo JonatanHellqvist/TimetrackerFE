@@ -7,19 +7,6 @@ interface Props {
  function StartActivity({ activityId } : Props) {
 
 	const [startActivity, setStartActivity] = useState("");
-	// const [active, setActive] = useState("");
-
-	// useEffect(() => {
-	// 	fetch(`http://localhost:8080/activity/${activityId}`)
-	// 	.then(res => res.json())
-	// 	.then(data => {
-	// 		if (data.startTime && !data.endTime) {
-	// 			setActive("Activity Started")
-	// 		} else {
-	// 			setActive("Activity not Started")
-	// 		}
-	// 	})
-	// }, [activityId]);
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@status för aktiviteten @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

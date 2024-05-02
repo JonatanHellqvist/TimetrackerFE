@@ -3,32 +3,36 @@ import { useState, useEffect } from 'react';
 // import StopActivity from './StopActivity';
 import ActivityButton from './ActivityButton';
 
-
-
+// interface PrintActivitiesProps {
+//     reloadActivities: boolean;
+// }
 function PrintActivites() {
 
-	interface Activity {
-		id: string,
-		activityName: string,
-		startTime: string | null,
-		endTime: string | null;
-		trackedTime: string | null;
-	}
-	const [activeActivities, setActiveActivities] = useState<Activity[]>([]);
-	const [completedActivities, setCompletedActivities] = useState<Activity[]>([]);
-
 	useEffect(() => {
-		fetch("https://shark-app-fcayz.ondigitalocean.app/activities")
-		.then(res => res.json())
-		.then((data: Activity[]) => {
-			const activeActivity = data.filter(activity => !activity.endTime);
-			const completedActivity = data.filter(activity => activity.endTime);
-		
-			setActiveActivities(activeActivity);
-			setCompletedActivities(completedActivity);
-		
-	});
+		fetchActivites();
 },[]);
+
+interface Activity {
+	id: string,
+	activityName: string,
+	startTime: string | null,
+	endTime: string | null;
+	trackedTime: string | null;
+}
+const [activeActivities, setActiveActivities] = useState<Activity[]>([]);
+const [completedActivities, setCompletedActivities] = useState<Activity[]>([]);
+
+const fetchActivites = () => {
+	return fetch ("https://shark-app-fcayz.ondigitalocean.app/activities")
+	.then (res => res.json()) 
+	.then ((data: Activity[]) => {
+		const activeActivity = data.filter(activity => !activity.endTime);
+		const completedActivity = data.filter(activity => activity.endTime);
+	
+		setActiveActivities(activeActivity);
+		setCompletedActivities(completedActivity);
+	});
+};
 	return (
 		<div>
 			<h3>Active Activites:</h3>

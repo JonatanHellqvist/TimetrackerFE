@@ -11,7 +11,6 @@ interface Props {
 	const addStopActivity = (e:any) => {
 		e.preventDefault();
 
-		
 		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/stop/${activityId}`, {
 			method: "PUT",
 			headers: {

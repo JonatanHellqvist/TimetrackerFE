@@ -1,8 +1,8 @@
 import { useState } from "react";
+import PrintActivites from "./PrintActivites"
 
 
-
-function AddActivity() {
+function AddActivity({reloadPrintActivities}:any) {
 
 	const [addActivity, setAddActivity] = useState<string>("")
 
@@ -17,9 +17,8 @@ function AddActivity() {
 			body: JSON.stringify({activityName: addActivity})
 		})
 		.then(() => {
-			setAddActivity("")
-			// PrintActivites()
-		})
+			setAddActivity("");
+		});
 	}	
 	return (
 		<div>
