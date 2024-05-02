@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import StartActivity from './StartActivity';
-import StopActivity from './StopActivity';
+// import StartActivity from './StartActivity';
+// import StopActivity from './StopActivity';
 import ActivityButton from './ActivityButton';
 
 
