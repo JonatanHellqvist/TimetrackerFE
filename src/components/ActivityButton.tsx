@@ -18,7 +18,7 @@ function ActivityButton({ activityId } : {activityId:string}) {
 	const [activityData, setActivityData] = useState<ActivityData | null>(null);
 
 	useEffect(() => {
-		fetch(`http://localhost:8080/activity/${activityId}`)
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/${activityId}`)
 		.then(res => res.json())
 		.then((data : ActivityData) => {
 		//spara objektet i activitydata

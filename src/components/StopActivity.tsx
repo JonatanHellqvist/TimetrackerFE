@@ -12,7 +12,7 @@ interface Props {
 		e.preventDefault();
 
 		
-		fetch(`http://localhost:8080/activity/stop/${activityId}`, {
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/stop/${activityId}`, {
 			method: "PUT",
 			headers: {
 				"content-type": "application/json"

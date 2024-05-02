@@ -18,7 +18,7 @@ function PrintActivites() {
 	const [completedActivities, setCompletedActivities] = useState<Activity[]>([]);
 
 	useEffect(() => {
-		fetch("http://localhost:8080/activities")
+		fetch("https://shark-app-fcayz.ondigitalocean.app/activities")
 		.then(res => res.json())
 		.then((data: Activity[]) => {
 			const activeActivity = data.filter(activity => !activity.endTime);

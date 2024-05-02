@@ -28,7 +28,7 @@ interface Props {
 	const addStartActivity = (e:any) => {
 		e.preventDefault();
 	
-		fetch(`http://localhost:8080/activity/start/${activityId}`, {
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/start/${activityId}`, {
 			method: "PUT",
 			headers: {
 				"content-type": "application/json"

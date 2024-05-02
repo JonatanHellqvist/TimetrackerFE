@@ -9,7 +9,7 @@ function AddActivity() {
 	const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		fetch("http://localhost:8080/activity", {
+		fetch("https://shark-app-fcayz.ondigitalocean.app/activity", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json"
