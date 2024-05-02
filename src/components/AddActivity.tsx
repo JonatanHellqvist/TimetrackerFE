@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PrintActivites from "./PrintActivites";
 
 
 function AddActivity() {
@@ -15,10 +16,11 @@ function AddActivity() {
 			},
 			body: JSON.stringify({activityName: addActivity})
 		})
-		.then(() => setAddActivity(""))
-			
-	}
-	
+		.then(() => {
+			setAddActivity("")
+			// PrintActivites()
+		})
+	}	
 	return (
 		<div>
 			<h3>Add Activity</h3>
