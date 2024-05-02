@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import PrintActivites from "./PrintActivites";
+import { useState } from "react";
+// import PrintActivites from "./PrintActivites";
 
 interface Props {
 	activityId: string;
