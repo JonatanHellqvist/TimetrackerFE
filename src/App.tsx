@@ -1,5 +1,6 @@
 
 import './App.css'
+import Menu from './components/Pages/Menu'
 import PrintActivites from './components/PrintActivites'
 // import AddActivity from './components/AddActivity'
 // import { useState } from 'react';
@@ -9,7 +10,7 @@ function App() {
 
   return (
     <>
-      <h1>TimeTracker :)</h1>
+      <Menu/>
       <PrintActivites/>
       {/* <AddActivity/> */}
     </>
