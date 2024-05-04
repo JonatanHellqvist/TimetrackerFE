@@ -1,45 +1,39 @@
-import { useState } from "react";
-// import PrintActivites from "./PrintActivites";
+// import { useState } from "react";
 
-interface Props {
-	activityId: string;
-}
- function StartActivity({ activityId } : Props) {
+// interface Props {
+// 	activityId: string;
+// }
+//  function StartActivity({ activityId } : Props) {
 
-	const [startActivity, setStartActivity] = useState("");
+// 	const [startActivity, setStartActivity] = useState("");
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@@status för aktiviteten @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// 	//@@@@@@@@@@@@@@@@@@@@@@@@@status för aktiviteten @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-	const addStartActivity = (e:any) => {
-		e.preventDefault();
+// 	const addStartActivity = (e: React.MouseEvent<HTMLButtonElement>) => {
+// 		e.preventDefault();
 	
-		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/start/${activityId}`, {
-			method: "PUT",
-			headers: {
-				"content-type": "application/json"
-			},
-			body: JSON.stringify({ startTime: startActivity })
-		})
-		.then(() => {
-			setStartActivity("")
-			// PrintActivites()
-		})
-		.catch(error => {
-			console.error("Error",error);
-		});
-}
+// 		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/start/${activityId}`, {
+// 			method: "PUT",
+// 			headers: {
+// 				"content-type": "application/json"
+// 			},
+// 			body: JSON.stringify({ startTime: startActivity })
+// 		})
+// 		.then(() => {
+// 			setStartActivity("")
+// 		})
+// 		.catch(error => {
+// 			console.error("Error",error);
+// 		});
+// }
 	
-	return (
-		<div>
-			<button onClick={addStartActivity}>Start Activity</button>
-		</div>
-	);
- }
+// 	return (
+// 		<div>
+// 			<button onClick={addStartActivity}>Start Activity</button>
+// 		</div>
+// 	);
+//  }
  
- export default StartActivity;
-
-
-
-
+//  export default StartActivity;

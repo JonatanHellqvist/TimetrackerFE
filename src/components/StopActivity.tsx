@@ -1,38 +1,34 @@
-import { useState } from "react";
-// import PrintActivites from "./PrintActivites";
+// import { useState } from "react";
 
-interface Props {
-	activityId: string;
-}
- function StopActivity({ activityId }: Props) {
-
-	const [stopActivity, setStopActivity] = useState("");
+// interface Props {
+// 	activityId: string;
+// }
+//  function StopActivity({ activityId }: Props) {
 	
-	const addStopActivity = (e:any) => {
-		e.preventDefault();
-
-		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/stop/${activityId}`, {
-			method: "PUT",
-			headers: {
-				"content-type": "application/json"
-			},
-			body: JSON.stringify({ stopTime: stopActivity })
-		})
-		.then(() => {
-			setStopActivity("")
-			// PrintActivites()
-			
-		})
-		.catch(error => {
-			console.error("Error",error);
-		});
-}
+// 	const [stopActivity, setStopActivity] = useState("");
 	
-	return (
-		<div>
-			<button onClick={addStopActivity}>Stop Activity</button>
-		</div>
-	);
- }
- 
- export default StopActivity;
+// 	const addStopActivity = (e: React.MouseEvent<HTMLButtonElement>) => {
+// 		e.preventDefault();
+
+// 		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/stop/${activityId}`, {
+// 			method: "PUT",
+// 			headers: {
+// 				"content-type": "application/json"
+// 			},
+// 			body: JSON.stringify({ stopTime: stopActivity })
+// 		})
+// 		.then(() => {
+// 			setStopActivity("")
+// 		})
+// 		.catch(error => {
+// 			console.error("Error",error);
+// 		});
+// }
+// 	return (
+// 		<div>
+// 			<button onClick={addStopActivity}>Stop Activity</button>
+// 		</div>
+// 	);
+//  }
+
+//  export default StopActivity;

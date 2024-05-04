@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import ActivityButton from './ActivityButton';
+import React, { useState, useEffect } from 'react';
 
 function PrintActivites() {
 
+	
 	interface Activity {
 		id: string,
 		activityName: string,
@@ -10,9 +10,22 @@ function PrintActivites() {
 		endTime: string | null;
 		trackedTime: string | null;
 	}
+
+	//btns interface
+	interface Props {
+		activityId: string;
+	}
+	//
+
 	const [addActivity, setAddActivity] = useState<string>("")
 	const [activeActivities, setActiveActivities] = useState<Activity[]>([]);
 	const [completedActivities, setCompletedActivities] = useState<Activity[]>([]);
+
+	//btns
+	const [startActivity, setStartActivity] = useState("");
+	const [stopActivity, setStopActivity] = useState("");
+	//
+
 
 	const fetchActivities = () => {
 		return fetch ("https://shark-app-fcayz.ondigitalocean.app/activities")
@@ -45,7 +58,46 @@ function PrintActivites() {
 			fetchActivities();
 		});
 	}	
-///-----------
+
+	// starta
+	const addStartActivity = ({activityId}: Props) =>(e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+	
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/start/${activityId}`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify({ startTime: startActivity })
+		})
+		.then(() => {
+			setStartActivity("");
+			fetchActivities();
+		})
+		.catch(error => {
+			console.error("Error",error);
+		});
+	}
+
+	//stoppa
+	const addStopActivity = ({activityId}: Props) =>(e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/stop/${activityId}`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify({ stopTime: stopActivity })
+		})
+		.then(() => {
+			setStopActivity("");
+			fetchActivities();
+		})
+		.catch(error => {
+			console.error("Error",error);
+		});
+}
 	return (
 		<div>
 			<h3>Active Activites:</h3>
@@ -53,9 +105,12 @@ function PrintActivites() {
 			
 			<div key={activity.id}> 
 			<h4>{activity.activityName}</h4>
-			{/* <StartActivity activityId={activity.id}/>
-			<StopActivity activityId={activity.id}/> */}
-			<ActivityButton activityId={activity.id}/>
+
+			{activity.startTime ? (
+                <button onClick={addStopActivity({ activityId: activity.id })}>Stop</button>
+                ) : (
+                <button onClick={addStartActivity({ activityId: activity.id })}>Start</button>
+                )}
 			
 			</div>
 			
@@ -81,5 +136,4 @@ function PrintActivites() {
 	);
 }
 
-// export { fetchActivities };
 export default PrintActivites;
