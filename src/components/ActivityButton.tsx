@@ -12,7 +12,6 @@ interface ActivityData {
     
 }
 
-
 function ActivityButton({ activityId } : {activityId:string}) {
 
 	const [activityData, setActivityData] = useState<ActivityData | null>(null);

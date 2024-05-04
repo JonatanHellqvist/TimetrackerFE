@@ -1,38 +1,51 @@
 import { useState, useEffect } from 'react';
-// import StartActivity from './StartActivity';
-// import StopActivity from './StopActivity';
 import ActivityButton from './ActivityButton';
 
-// interface PrintActivitiesProps {
-//     reloadActivities: boolean;
-// }
 function PrintActivites() {
 
-	useEffect(() => {
-		fetchActivites();
-},[]);
+	interface Activity {
+		id: string,
+		activityName: string,
+		startTime: string | null,
+		endTime: string | null;
+		trackedTime: string | null;
+	}
+	const [addActivity, setAddActivity] = useState<string>("")
+	const [activeActivities, setActiveActivities] = useState<Activity[]>([]);
+	const [completedActivities, setCompletedActivities] = useState<Activity[]>([]);
 
-interface Activity {
-	id: string,
-	activityName: string,
-	startTime: string | null,
-	endTime: string | null;
-	trackedTime: string | null;
-}
-const [activeActivities, setActiveActivities] = useState<Activity[]>([]);
-const [completedActivities, setCompletedActivities] = useState<Activity[]>([]);
+	const fetchActivities = () => {
+		return fetch ("https://shark-app-fcayz.ondigitalocean.app/activities")
+		.then (res => res.json()) 
+		.then ((data: Activity[]) => {
+			const activeActivity = data.filter(activity => !activity.endTime);
+			const completedActivity = data.filter(activity => activity.endTime);
+		
+			setActiveActivities(activeActivity);
+			setCompletedActivities(completedActivity);
+		});
+	};
+		useEffect(() => {
+			fetchActivities();
+	},[]);
 
-const fetchActivites = () => {
-	return fetch ("https://shark-app-fcayz.ondigitalocean.app/activities")
-	.then (res => res.json()) 
-	.then ((data: Activity[]) => {
-		const activeActivity = data.filter(activity => !activity.endTime);
-		const completedActivity = data.filter(activity => activity.endTime);
-	
-		setActiveActivities(activeActivity);
-		setCompletedActivities(completedActivity);
-	});
-};
+	///-----------
+	const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		fetch("https://shark-app-fcayz.ondigitalocean.app/activity", {
+			method: "POST",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify({activityName: addActivity})
+		})
+		.then(() => {
+			setAddActivity("");
+			fetchActivities();
+		});
+	}	
+///-----------
 	return (
 		<div>
 			<h3>Active Activites:</h3>
@@ -54,8 +67,19 @@ const fetchActivites = () => {
 			<p>Incheckade minuter: {activity.trackedTime}</p>
 			</div>
 		))}
+		<div>
+			<h3>Add Activity</h3>
+
+			<form onSubmit= {saveNewActivity}>
+				<input type="text" value={addActivity} onChange={((e) => setAddActivity(e.target.value))}>
+				</input>
+				<button>Add</button>
+			</form>
 		</div>
+		</div>
+		
 	);
 }
 
+// export { fetchActivities };
 export default PrintActivites;
