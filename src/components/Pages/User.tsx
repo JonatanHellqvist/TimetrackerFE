@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+///TODO städa upp logiken för forms
 function User() {
 
 	interface User {
@@ -10,6 +11,8 @@ function User() {
 	// const [login, setLogin] = useState<User>();
 
 	const [loginForm, setLoginForm] = useState(true); //för att visa loginformet standard
+	//
+	const [registerForm, setRegisterForm] = useState(false);
 	const [register, setRegister] = useState<User>();
 	const [userName, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -22,12 +25,40 @@ function User() {
 			setLoginForm(false);
 		}
 	}, []);
+	useEffect (() => {
+		if(loggedInUser) {
+			setRegisterForm(false);
+			setLoginForm(false);
+			printUser();
+		}
+	}, [loggedInUser]);
 
 	const handleloginForm = () => {
-		if(!register) {
-			setLoginForm(!loginForm);
-		}
+		setLoginForm(true);
+		
+		
+		// setRegisterForm(false);
 	};
+
+	const handleRegisterForm = () => {
+		setRegisterForm(true);
+		setLoginForm(false);
+	}
+
+
+	//todo
+	const printUser = () => {
+		if(loggedInUser) {
+			return (
+			<div id="UserInfo">
+					<h2>Logged in as: {loggedInUser.userName}</h2>
+					<button onClick={handleLogout}>Logout</button>
+				</div>
+			);
+		} else {
+			return <div id="UserInfo"></div>;
+		}
+	}
 	const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -47,8 +78,10 @@ function User() {
 				//local storage för användarinfo
 				localStorage.setItem("loggedInUser", JSON.stringify(data));
 				setLoginForm(false);
-
+				setRegisterForm(false);
+			
 				console.log("Login successfull for User:",(data));
+				
 			}
 			
 		} else if (res.status === 401){
@@ -56,12 +89,14 @@ function User() {
 		} else {
 			console.log("Login failed")
 		}
+		
 	} 
 
 	const handleLogout = () => {
 		setLoggedInUser(null);
 		localStorage.removeItem("loggedInUser");
 		setLoginForm(true);
+		setRegisterForm(false);
 	  };
 
 	const newUser = (e: React.FormEvent<HTMLFormElement>) => {
@@ -83,8 +118,8 @@ function User() {
 	.then(data => {
 		console.log("Registration Sucessfull")
 		setRegister(data);
+		// setRegisterForm(false);
 		setLoginForm(true);
-		
 	})
 	.catch(error => {
 		console.error("Error when registrating User: ", error);
@@ -93,90 +128,62 @@ function User() {
 
 	
 
-	return (
+return (
 		
-		<div>
-			{loggedInUser ? (
+	<div>
+		{loggedInUser ? (
+			<div>
+				<h2>Logged in as: {loggedInUser.userName}</h2>
+				<button onClick={handleLogout}>Logout</button>
+			</div>
+			) : (
 				<div>
-					<h2>Logged in as: {loggedInUser.userName}</h2>
-					<button onClick={handleLogout}>Logout</button>
-				</div>
-				) : (
+					{loginForm ? (
 					<div>
-						{loginForm ? (
-						<div>
-						<h2>Login</h2>
+					<h2>Login</h2>
 
-						<form onSubmit={handleLogin}>
-						<label htmlFor="userName">Username</label>
-						<input type="text" id="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required/>
+					<form onSubmit={handleLogin}>
+					<label htmlFor="userName">Username</label>
+					<input type="text" id="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required/>
 
-						<label htmlFor="password">Password</label>
-						<input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+					<label htmlFor="password">Password</label>
+					<input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+					<br />
+
+					<button type="submit">Logga in</button>
+					<button onClick={handleRegisterForm}>Register</button>
+				</form>
+				</div>	
+			) : ( 
+				<div>
+					<h2>Register</h2>
+					<form onSubmit={newUser}>
+
+						<label htmlFor="userName">Username:</label>
+						<input type="text" id="userName" name="userName" required/>
+
+						<label htmlFor="password">Password:</label>
+						<input type="password" id="password" name="password" required/>
 						<br />
+						<button type="submit">Register</button><button type="button" onClick={handleloginForm}>Cancel</button>
 
-						<button type="submit">Logga in</button>
-						<button onClick={handleloginForm}>Register</button>
 					</form>
-					</div>	
-				) : ( 
-					<div>
-						<h2>Register</h2>
-						<form onSubmit={newUser}>
-
-							<label htmlFor="userName">Username:</label>
-							<input type="text" id="userName" name="userName" required/>
-
-							<label htmlFor="password">Password:</label>
-							<input type="password" id="password" name="password" required/>
-							<br />
-							<button type="submit">Register</button><button type="button" onClick={handleloginForm}>Cancel</button>
-
-						</form>
-					</div>
-			
-			
-			)}
-			{register && (
-					<div>
-						<h3>Registration sucessfull!</h3>
-						<p>Registered User: {register.userName}</p>
-						{/*Tar register objektet och formaterar till json format o skriver ut*/}
-						{/* <pre>{JSON.stringify(register,null,2)}</pre> */}
-					</div>
-			)}
-		</div>
-				)}
 				</div>
-	);
+		
+		
+		)}
+		{register && (
+				<div>
+					<h3>Registration sucessfull!</h3>
+					<p>Registered User: {register.userName}</p>
+					{/*Tar register objektet och formaterar till json format o skriver ut*/}
+					{/* <pre>{JSON.stringify(register,null,2)}</pre> */}
+				</div>
+		)}
+	</div>
+			)}
+			</div>
+);
 }
 
 export default User;
-
-
-{/* <form onSubmit= {saveNewActivity}>
-				<input type="text" value={addActivity} onChange={((e) => setAddActivity(e.target.value))}>
-				</input>
-				<button>Add</button>
-			</form> */}
-
-
-// const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
-// 	e.preventDefault();
-
-// 	fetch("https://shark-app-fcayz.ondigitalocean.app/activity", {
-// 		method: "POST",
-// 		headers: {
-// 			"content-type": "application/json"
-// 		},
-// 		body: JSON.stringify({activityName: addActivity})
-// 	})
-// 	.then(() => {
-// 		setAddActivity("");
-// 		fetchActivities();
-// 	});
-// }	
-
-
-// const [addActivity, setAddActivity] = useState<string>("")
-

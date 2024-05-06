@@ -8,12 +8,12 @@ import PrintActivites from "../PrintActivites";
 
 function Menu() {
 
-	const [admin, setAdmin] = useState<boolean>(false);
+	// const [admin, setAdmin] = useState<boolean>(false);
 	const [page,setPage] = useState<string>("");
 
-	useEffect(() => {
-		setAdmin(true)
-	}, [])
+	// useEffect(() => {
+	// 	setAdmin(true)
+	// }, [])
 
 	useEffect(() => {
 
@@ -47,7 +47,7 @@ function Menu() {
 			<button onClick={() => setPage("user")}>User</button>
 			<button onClick={() => setPage("activeactivities")}>Active Activities</button>
 			<button onClick={() => setPage("activityhistory")}>Activity History/Statistics</button>
-			{admin ? <button onClick={() => setPage("admin")}>Admin</button> : null}
+			<button onClick={() => setPage("admin")}>Admin</button>
 
 			<div>Page: {page}</div>
 
