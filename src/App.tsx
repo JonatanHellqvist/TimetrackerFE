@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Menu/>
-      <PrintActivites/>
+      {/* <PrintActivites/> */}
       {/* <AddActivity/> */}
     </>
   )

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Start from "./Start";
 import Admin from "./Admin";
-import ActivityHistory from "./ActivityHistory";
-import ActiveActivities from "./ActiveActivities";
+// import ActivityHistory from "./ActivityHistory";
+// import ActiveActivities from "./ActiveActivities";
 import User from "./User";
+import PrintActivites from "../PrintActivites";
 
 function Menu() {
 
@@ -21,6 +22,7 @@ function Menu() {
 		if (!pageUrl) {
 				const queryParam = new URLSearchParams(window.location.search);
 				const getUrl = queryParam.get("page");
+
 			if (getUrl) {
 				pageUrl = getUrl;
 				setPage(getUrl)
@@ -38,7 +40,8 @@ function Menu() {
 	}, [page])
 
 	return (
-		<div>
+		<>
+		
 			<h1>TimeTracker:</h1>
 			<button onClick={() => setPage("start")}>Start</button>
 			<button onClick={() => setPage("user")}>User</button>
@@ -47,7 +50,20 @@ function Menu() {
 			{admin ? <button onClick={() => setPage("admin")}>Admin</button> : null}
 
 			<div>Page: {page}</div>
-		</div>
+
+			{
+				{
+					"start": <Start />,
+					"user": <User />,
+					"activeactivities": <PrintActivites />,
+					"activityhistory": <PrintActivites  />,
+					"admin": <Admin/>,
+				} [page]
+			}
+
+		</>
+		
+		
 	);
 }
 
