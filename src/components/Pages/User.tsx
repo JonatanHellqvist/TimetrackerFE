@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function User() {
 
@@ -11,13 +11,58 @@ function User() {
 
 	const [loginForm, setLoginForm] = useState(true); //för att visa loginformet standard
 	const [register, setRegister] = useState<User>();
+	const [userName, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+
+	useEffect (() => {
+		const userFromLocalStorage = localStorage.getItem("loggedInUser");
+		if (userFromLocalStorage) {
+			setLoggedInUser(JSON.parse(userFromLocalStorage));
+			setLoginForm(false);
+		}
+	}, []);
 
 	const handleloginForm = () => {
-		setLoginForm(!loginForm);
-	}
-	const login = (e:React.FormEvent<HTMLFormElement>) => {
+		if(!register) {
+			setLoginForm(!loginForm);
+		}
+	};
+	const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-	}
+		const res = await fetch ("https://shark-app-fcayz.ondigitalocean.app/user/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body:JSON.stringify({ userName, password})
+		});
+
+		if (res.ok) {
+			const data = await res.json();
+			if(data) {
+				setLoggedInUser(data.user)
+
+				//local storage för användarinfo
+				localStorage.setItem("loggedInUser", JSON.stringify(data));
+				setLoginForm(false);
+
+				console.log("Login successfull for User:",(data));
+			}
+			
+		} else if (res.status === 401){
+			console.log("Invalid username or password")
+		} else {
+			console.log("Login failed")
+		}
+	} 
+
+	const handleLogout = () => {
+		setLoggedInUser(null);
+		localStorage.removeItem("loggedInUser");
+		setLoginForm(true);
+	  };
 
 	const newUser = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -51,31 +96,44 @@ function User() {
 	return (
 		
 		<div>
-			
-			{loginForm ? (
+			{loggedInUser ? (
 				<div>
-					<h2>Login</h2>
-					<form onSubmit={login}>
-					<button type="submit">Logga in</button><button onClick={handleloginForm}>Register</button>
-					</form>
-				
-				
+					<h2>Logged in as: {loggedInUser.userName}</h2>
+					<button onClick={handleLogout}>Logout</button>
 				</div>
-				
-			) : ( 
-				<div>
-					
-					
-					<form onSubmit={newUser}>
-						<label htmlFor="userName">Username:</label>
-						<input type="text" id="userName" name="userName" required/>
+				) : (
+					<div>
+						{loginForm ? (
+						<div>
+						<h2>Login</h2>
 
-						<label htmlFor="password">Password:</label>
-						<input type="password" id="password" name="password" required/>
+						<form onSubmit={handleLogin}>
+						<label htmlFor="userName">Username</label>
+						<input type="text" id="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required/>
+
+						<label htmlFor="password">Password</label>
+						<input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
 						<br />
-						<button type="submit">Register</button><button type="button" onClick={handleloginForm}>Cancel</button>
+
+						<button type="submit">Logga in</button>
+						<button onClick={handleloginForm}>Register</button>
 					</form>
-				</div>
+					</div>	
+				) : ( 
+					<div>
+						<h2>Register</h2>
+						<form onSubmit={newUser}>
+
+							<label htmlFor="userName">Username:</label>
+							<input type="text" id="userName" name="userName" required/>
+
+							<label htmlFor="password">Password:</label>
+							<input type="password" id="password" name="password" required/>
+							<br />
+							<button type="submit">Register</button><button type="button" onClick={handleloginForm}>Cancel</button>
+
+						</form>
+					</div>
 			
 			
 			)}
@@ -88,7 +146,8 @@ function User() {
 					</div>
 			)}
 		</div>
-		
+				)}
+				</div>
 	);
 }
 
