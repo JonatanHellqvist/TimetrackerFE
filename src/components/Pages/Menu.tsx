@@ -4,7 +4,9 @@ import Admin from "./Admin";
 // import ActivityHistory from "./ActivityHistory";
 // import ActiveActivities from "./ActiveActivities";
 import User from "./User";
-import PrintActivites from "../PrintActivites";
+// import PrintActivites from "../PrintActivites";
+import ActivityHistory from "./ActivityHistory";
+import ActiveActivities from "./ActiveActivities";
 
 function Menu() {
 
@@ -55,13 +57,23 @@ function Menu() {
 				{
 					"start": <Start />,
 					"user": <User />,
-					"activeactivities": <PrintActivites />,
-					"activityhistory": <PrintActivites  />,
+					"activeactivities": <ActiveActivities/>,
+					"activityhistory": <ActivityHistory  />,
 					"admin": <Admin/>,
 				} [page]
 			}
 
 		</>
+
+// {
+// 	{
+// 		"start": <Start />,
+// 		"user": <User />,
+// 		// "activeactivities": <ActiveActivities />,
+// 		// "activityhistory": <ActivityHistory  />,
+// 		"admin": <Admin/>,
+// 	} [page]
+// }
 		
 		
 	);

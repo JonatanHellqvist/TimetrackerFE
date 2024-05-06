@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-///TODO städa upp logiken för forms
+
 function User() {
 
 	interface User {
@@ -12,7 +12,7 @@ function User() {
 
 	const [loginForm, setLoginForm] = useState(true); //för att visa loginformet standard
 	//
-	const [registerForm, setRegisterForm] = useState(false);
+	// const [registerForm, setRegisterForm] = useState(false);
 	const [register, setRegister] = useState<User>();
 	const [userName, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -27,7 +27,7 @@ function User() {
 	}, []);
 	useEffect (() => {
 		if(loggedInUser) {
-			setRegisterForm(false);
+			// setRegisterForm(false);
 			setLoginForm(false);
 			printUser();
 		}
@@ -41,12 +41,9 @@ function User() {
 	};
 
 	const handleRegisterForm = () => {
-		setRegisterForm(true);
+		// setRegisterForm(true);
 		setLoginForm(false);
 	}
-
-
-	//todo
 	const printUser = () => {
 		if(loggedInUser) {
 			return (
@@ -78,9 +75,13 @@ function User() {
 				//local storage för användarinfo
 				localStorage.setItem("loggedInUser", JSON.stringify(data));
 				setLoginForm(false);
-				setRegisterForm(false);
-			
+				// setRegisterForm(false);
+				
+				
+
 				console.log("Login successfull for User:",(data));
+				
+				
 				
 			}
 			
@@ -96,7 +97,7 @@ function User() {
 		setLoggedInUser(null);
 		localStorage.removeItem("loggedInUser");
 		setLoginForm(true);
-		setRegisterForm(false);
+		// setRegisterForm(false);
 	  };
 
 	const newUser = (e: React.FormEvent<HTMLFormElement>) => {
@@ -187,3 +188,92 @@ return (
 }
 
 export default User;
+
+
+{/* <form onSubmit= {saveNewActivity}>
+				<input type="text" value={addActivity} onChange={((e) => setAddActivity(e.target.value))}>
+				</input>
+				<button>Add</button>
+			</form> */}
+
+
+// const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
+// 	e.preventDefault();
+
+// 	fetch("https://shark-app-fcayz.ondigitalocean.app/activity", {
+// 		method: "POST",
+// 		headers: {
+// 			"content-type": "application/json"
+// 		},
+// 		body: JSON.stringify({activityName: addActivity})
+// 	})
+// 	.then(() => {
+// 		setAddActivity("");
+// 		fetchActivities();
+// 	});
+// }	
+
+
+// const [addActivity, setAddActivity] = useState<string>("")
+
+
+
+// return (
+		
+// 	<div>
+// 		{loggedInUser ? (
+// 			<div>
+// 				<h2>Logged in as: {loggedInUser.userName}</h2>
+// 				<button onClick={handleLogout}>Logout</button>
+// 			</div>
+// 			) : (
+// 				<div>
+// 					{loginForm ? (
+// 					<div>
+// 					<h2>Login</h2>
+
+// 					<form onSubmit={handleLogin}>
+// 					<label htmlFor="userName">Username</label>
+// 					<input type="text" id="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required/>
+
+// 					<label htmlFor="password">Password</label>
+// 					<input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+// 					<br />
+
+// 					<button type="submit">Logga in</button>
+// 					<button onClick={handleRegisterForm}>Register</button>
+// 				</form>
+// 				</div>	
+// 			) : ( 
+// 				<div>
+// 					<h2>Register</h2>
+// 					<form onSubmit={newUser}>
+
+// 						<label htmlFor="userName">Username:</label>
+// 						<input type="text" id="userName" name="userName" required/>
+
+// 						<label htmlFor="password">Password:</label>
+// 						<input type="password" id="password" name="password" required/>
+// 						<br />
+// 						<button type="submit">Register</button><button type="button" onClick={handleloginForm}>Cancel</button>
+
+// 					</form>
+// 				</div>
+		
+		
+// 		)}
+// 		{register && (
+// 				<div>
+// 					<h3>Registration sucessfull!</h3>
+// 					<p>Registered User: {register.userName}</p>
+// 					{/*Tar register objektet och formaterar till json format o skriver ut*/}
+// 					{/* <pre>{JSON.stringify(register,null,2)}</pre> */}
+// 				</div>
+// 		)}
+// 	</div>
+// 			)}
+// 			</div>
+// );
+// }
+
+// export default User;
