@@ -13,6 +13,7 @@ function ActivityHistory() {
 	}
 	
 	const [historyList, setHistoryList] = useState<Activity[] | null>(null);
+	const [startActivityFromHistory, setStartActivityFromHistory] = useState("");
 	
 	const getUserIdFromLocalStorage = () => {
 		const loggedInUserString = localStorage.getItem("loggedInUser");
@@ -53,6 +54,26 @@ function ActivityHistory() {
 	},[]);
 
 
+	const addStartActivityFromHistory = (activity: Activity) =>(e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+	
+		const userId = getUserIdFromLocalStorage();
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/startactivity/${userId}/${activity.id}`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify({ startTime: startActivityFromHistory })
+		})
+		.then(() => {
+			setStartActivityFromHistory("");
+			fetchHistoryList();
+		})
+		.catch(error => {
+			console.error("Error",error);
+		});
+	}
+
 	return (
 		<div>
 			<h1>Activity History</h1>
@@ -64,6 +85,7 @@ function ActivityHistory() {
                         <p>Start Time: {activity.startTime}</p>
                         <p>End Time: {activity.endTime}</p>
                         <p>Tracked Time: {activity.trackedTime} min</p>
+						<button onClick={addStartActivityFromHistory(activity)}>Start</button>
                     </li>
 			))}
 			</ul>	
