@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ActivityTimer from "./ActivityTimer";
 
 
 function ActiveActivities() {
@@ -14,8 +15,8 @@ function ActiveActivities() {
 	const [activityList, setActivityList] = useState<Activity[] |null>(null);
 	const [addActivity, setAddActivity] = useState<string>("")
 
-	const [startActivity, setStartActivity] = useState("");
-	const [stopActivity, setStopActivity] = useState("");
+	const [startActivity, setStartActivity] = useState <string | null> (null);
+	const [stopActivity, setStopActivity] = useState <string | null> (null);
 	
 
 	// localhost:8080/663941cdba707236dfa1d18c/list/addactivity
@@ -51,7 +52,7 @@ function ActiveActivities() {
 			body: JSON.stringify({ startTime: startActivity })
 		})
 		.then(() => {
-			setStartActivity("");
+			setStartActivity(null);
 			fetchActivities();
 		})
 		.catch(error => {
@@ -130,6 +131,7 @@ function ActiveActivities() {
                         <p>Start Time: {activity.startTime}</p>
                         <p>End Time: {activity.endTime}</p>
                         <p>Tracked Time: {activity.trackedTime}</p>
+						<ActivityTimer endTime={activity.endTime} startTime={activity.startTime}/>
 						{activity.startTime ? (
                 <button onClick={addStopActivity(activity)}>Stop</button>
                 ) : (

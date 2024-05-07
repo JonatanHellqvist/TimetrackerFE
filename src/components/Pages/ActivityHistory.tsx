@@ -58,6 +58,8 @@ function ActivityHistory() {
 		e.preventDefault();
 	
 		const userId = getUserIdFromLocalStorage();
+		
+
 		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/startactivity/${userId}/${activity.id}`, {
 			method: "PUT",
 			headers: {
