@@ -8,6 +8,7 @@ function Admin() {
 		userName: string;
 		password: string;
 		admin: boolean | null;
+		totalTrackedTime: string | null;
 	}
 
 	const [users, setUsers] = useState<User[]>([]);
@@ -31,6 +32,7 @@ function Admin() {
 			fetchUsers();
 	},[]);
 
+
 	return (
 		<div>
 			{loggedInUser && loggedInUser.admin ? (
@@ -40,7 +42,7 @@ function Admin() {
 				<ul>
 					{users.map((user) => (
 						<li key={user.id}>
-							<p>UserName: {user.userName} TrackedTime: {}</p>
+							<p>UserName: {user.userName} TrackedTime: {user.totalTrackedTime}</p>
 							
 						</li>
 					))}
