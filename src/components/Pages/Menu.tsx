@@ -3,10 +3,11 @@ import Start from "./Start";
 import Admin from "./Admin";
 // import ActivityHistory from "./ActivityHistory";
 // import ActiveActivities from "./ActiveActivities";
-import User from "./User";
+// import User from "./User";
 // import PrintActivites from "../PrintActivites";
 import ActivityHistory from "./ActivityHistory";
 import ActiveActivities from "./ActiveActivities";
+import UserLogin from "./UserLogin";
 
 function Menu() {
 
@@ -56,7 +57,7 @@ function Menu() {
 			{
 				{
 					"start": <Start />,
-					"user": <User />,
+					"user": <UserLogin />,
 					"activeactivities": <ActiveActivities/>,
 					"activityhistory": <ActivityHistory  />,
 					"admin": <Admin/>,
