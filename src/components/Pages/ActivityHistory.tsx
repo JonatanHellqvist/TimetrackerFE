@@ -24,11 +24,9 @@ function ActivityHistory() {
 			const loggedInUser = JSON.parse(loggedInUserString);
 			if (loggedInUser && loggedInUser.id) {
 				console.log(loggedInUser.id);
-				return loggedInUser.id;
-				
+				return loggedInUser.id;	
 			}
 		}
-		
 		return null; 
 	  };
 
@@ -46,16 +44,15 @@ function ActivityHistory() {
 		.then ((data:Activity[]) => {
 			console.log(data);
 			setHistoryList(data);
-
-			return historyList;
-		})
-		
+		return historyList;
+		})	
 };
+
 		useEffect(() => {
 			fetchHistoryList();
 			
 	},[]);
-	
+
 	const addStartActivityFromHistory = (activity: Activity) =>(e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		const userId = getUserIdFromLocalStorage();
@@ -110,8 +107,6 @@ function ActivityHistory() {
 						
 						<button onClick={addStartActivityFromHistory(activity)}>Start</button>	
 						<button onClick={DeleteUserActivityFromHistory(activity)}>Delete</button>
-
-						
                     </li>
 			))}
 			</ul>	

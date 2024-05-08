@@ -17,18 +17,15 @@ function ActivityTimer( { startTime, endTime } : { startTime : string | null; en
                 setTimedTime(elapsedMinutes);
             }, 1000);
         }
-
 		return () => {
 			if (intervalId) clearInterval(intervalId);
 	};
 },[startTime,endTime]);
 
-	
 	return (
 		<div>
 			<p>Elapsed Time: {timedTime} min</p>
 		</div>
 	);
 }
-
 export default ActivityTimer;

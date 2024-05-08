@@ -17,8 +17,8 @@ function ActiveActivities() {
 	const [activityList, setActivityList] = useState<Activity[] |null>(null);
 	const [addActivity, setAddActivity] = useState<string>("")
 
-	const [startActivity, setStartActivity] = useState <string | null> (null);
-	const [stopActivity, setStopActivity] = useState <string | null> (null);
+	// const [startActivity, setStartActivity] = useState <string | null> (null);
+	// const [stopActivity, setStopActivity] = useState <string | null> (null);
 	
 	const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -34,8 +34,7 @@ function ActiveActivities() {
 		})
 		.then(() => {
 			setAddActivity("");
-			fetchActivities();
-			
+			fetchActivities();	
 		});
 	}	
 	//starta
@@ -43,23 +42,39 @@ function ActiveActivities() {
 		e.preventDefault();
 	
 		const userId = getUserIdFromLocalStorage();
-		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/start/${userId}/${activity.id}`, {
+		
+		if (activity.startTime && activity.endTime) {
+
+			fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/reset/${userId}/${activity.id}`, {
 			method: "PUT",
 			headers: {
 				"content-type": "application/json"
 			},
-			body: JSON.stringify({ startTime: startActivity })
-		})
-		.then(() => {
-			setStartActivity(null);
-			fetchActivities();
-		})
-		.catch(error => {
-			console.error("Error",error);
-		});
+			})
+				.then(() => {
+					// setStartActivity(null);
+					fetchActivities();
+				})
+				.catch(error => {
+					console.error("Error",error);
+				});
+		} else {
+			fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/start/${userId}/${activity.id}`, {
+				method: "PUT",
+				headers: {
+					"content-type": "application/json"
+				},
+				body: JSON.stringify({ startTime: new Date().toISOString() })
+			})
+				.then(() => {
+					// setStartActivity(null);
+					fetchActivities();
+				})
+				.catch(error => {
+					console.error("Error",error);
+				});
+		}
 	}
-
-
 	//stoppa
 	const addStopActivity = (activity: Activity) =>(e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -70,10 +85,10 @@ function ActiveActivities() {
 			headers: {
 				"content-type": "application/json"
 			},
-			body: JSON.stringify({ stopTime: stopActivity })
+			body: JSON.stringify({ stopTime: new Date().toISOString()})
 		})
 		.then(() => {
-			setStopActivity("");
+			// setStopActivity("");
 			fetchActivities();
 		})
 		.catch(error => {
@@ -88,11 +103,9 @@ function ActiveActivities() {
 			const loggedInUser = JSON.parse(loggedInUserString);
 			if (loggedInUser && loggedInUser.id) {
 				console.log(loggedInUser.id);
-				return loggedInUser.id;
-				
+				return loggedInUser.id;	
 			}
 		}
-		
 		return null; 
 	  };
 
@@ -119,10 +132,8 @@ function ActiveActivities() {
 			fetchActivities();
 	},[]);
 
-
 	//delete
-
-	const DeleteUserActivity = (activity: Activity) => {
+	const deleteUserActivity = (activity: Activity) => {
 		console.log("DeleteUserActivity called with activity:", activity);
 		
 		const userId = getUserIdFromLocalStorage();
@@ -137,12 +148,28 @@ function ActiveActivities() {
 				"content-type": "application/json"
 			}
 		})
-		.then(() => {
-				
+		.then(() => {		
 			fetchActivities();
 		})
 	}
 
+	const moveActivityToHistory = (activity : Activity) => {
+		const userId = getUserIdFromLocalStorage();
+		console.log(userId, activity.id);
+		if (!userId) {
+			console.error("No userId found in local storage")
+			return;
+		}
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/${userId}/${activity.id}/activity/movetohistory`,{
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			}
+		})
+		.then(() => {	
+			fetchActivities();
+		})
+	}
 	return (
 		<div>
 			<h1>Active Activites:</h1>
@@ -155,16 +182,16 @@ function ActiveActivities() {
                         <p>End Time: {activity.endTime}</p>
                         <p>Tracked Time: {activity.trackedTime}</p>
 						<ActivityTimer endTime={activity.endTime} startTime={activity.startTime}/>
-						{activity.startTime ? (
-                <button onClick={addStopActivity(activity)}>Stop</button>
-                ) : (
-                <button onClick={addStartActivity(activity)}>Start</button>
-                )}
-				<button onClick={() => DeleteUserActivity(activity)}>Delete</button>
-				<button>Move to History</button>
-			
-                    </li>
-					
+						{!activity.startTime ? (
+							<button onClick={addStartActivity(activity)}>Start</button>
+                		) : activity.endTime ? (
+							<button onClick={addStartActivity(activity)}>Start</button>
+						) : (
+							<button onClick={addStopActivity(activity)}>Stop</button>
+                		)}
+						<button onClick={() => deleteUserActivity(activity)}>Delete</button>
+						<button onClick={() => moveActivityToHistory(activity)}>Move to History</button>
+                    </li>		
 			))}
 			</ul>
 			) : (
