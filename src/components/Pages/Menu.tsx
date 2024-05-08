@@ -11,13 +11,8 @@ import UserLogin from "./UserLogin";
 
 function Menu() {
 
-	// const [admin, setAdmin] = useState<boolean>(false);
 	const [page,setPage] = useState<string>("");
-
-	// useEffect(() => {
-	// 	setAdmin(true)
-	// }, [])
-
+	
 	useEffect(() => {
 
 		let pageUrl = page;
@@ -34,8 +29,7 @@ function Menu() {
 				pageUrl = "user"	
 			}
 		} 
-		
-		
+			
 		window.history.pushState(
 			null,
 			"",
@@ -45,16 +39,16 @@ function Menu() {
 
 	return (
 		<>
-		
-			<h1>TimeTracker:</h1>
-			{/* <button onClick={() => setPage("start")}>Start</button> */}
-			<button onClick={() => setPage("user")}>User</button>
-			<button onClick={() => setPage("activeactivities")}>Active Activities</button>
-			<button onClick={() => setPage("activityhistory")}>Activity History/Statistics</button>
-			<button onClick={() => setPage("admin")}>Admin</button>
-
-			{/* <div>Page: {page}</div> */}
-
+			<div id="headerDiv">
+				<h1 id="timeTrackerh1">TimeTracker</h1>
+				<p>Track your activites with TimeTracker!</p>
+			</div>
+			<div id="menuBtnsDiv">
+				<button onClick={() => setPage("user")}>User</button>
+				<button onClick={() => setPage("activeactivities")}>Active Activities</button>
+				<button onClick={() => setPage("activityhistory")}>Activity History/Statistics</button>
+				<button onClick={() => setPage("admin")}>Admin</button>
+			</div>
 			{
 				{
 					// "start": <Start />,
@@ -65,19 +59,7 @@ function Menu() {
 				} [page]
 			}
 
-		</>
-
-// {
-// 	{
-// 		"start": <Start />,
-// 		"user": <User />,
-// 		// "activeactivities": <ActiveActivities />,
-// 		// "activityhistory": <ActivityHistory  />,
-// 		"admin": <Admin/>,
-// 	} [page]
-// }
-		
-		
+		</>	
 	);
 }
 

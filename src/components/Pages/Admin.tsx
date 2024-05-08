@@ -36,18 +36,34 @@ function Admin() {
 	return (
 		<div>
 			{loggedInUser && loggedInUser.admin ? (
-				<div>
-				<h1>Hi admin</h1>
-				<h2>User List:</h2>
-				<ul>
-					{users.map((user) => (
-						<li key={user.id}>
-							<p>UserName: {user.userName} TrackedTime: {user.totalTrackedTime}</p>
-							
-						</li>
-					))}
-				</ul>
-
+				<div id="adminMainDiv">
+					<div id="adminH1Div">
+						<h1 id="adminH1">Admin</h1>
+					</div>
+						<div id="adminInfoH2Div">
+							<h2 id="adminInfoH2">User List & Statistics</h2>
+						</div>
+						<ul id="adminUl">
+							{users.map((user) => (
+								<li id="adminLi"key={user.id}>
+									<div id="adminLiInfoDiv">
+										<div id="adminLiInfoUser">
+											<div>
+												<p>Username:</p>
+											</div>
+											<div>
+												<p>{user.userName}</p>
+											</div>
+										</div>
+										<div id="adminLiInfoTime">
+											<p>Total tracked time for User: {user.totalTrackedTime} min</p>	
+										</div>
+									</div>
+										 
+								</li>
+							))}
+						</ul>
+						
 				</div>
 			) : (
 				<h1>Get admin acess to show this page</h1>

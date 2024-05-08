@@ -94,19 +94,33 @@ function ActivityHistory() {
 	}
 
 	return (
-		<div>
-			<h1>Activity History</h1>
+		<div id="historyMainDiv">
+			<div id="historyH1Div">
+				<h1 id="historyH1">Activity History</h1>
+			</div>
+			
 			{historyList ? (
-			<ul>
+			<ul id="historyUl">
 			{historyList.map(activity => (
-                    <li key={activity.id}>
-                        <h3>{activity.activityName}</h3>
-                        <p>Start Time: {activity.startTime}</p>
-                        <p>End Time: {activity.endTime}</p>
-                        <p>Tracked Time: {activity.trackedTime} min</p>
-						
-						<button onClick={addStartActivityFromHistory(activity)}>Start</button>	
-						<button onClick={DeleteUserActivityFromHistory(activity)}>Delete</button>
+                    <li id="historyLi" key={activity.id}>
+						<div id="historyLiH3">
+							<h3>{activity.activityName}</h3>
+						</div>
+                        <div id="historyLiInfoDiv">
+							<div className="historyLiInfoP">
+								<p>Start Time: {activity.startTime}</p>
+							</div>
+							<div className="historyLiInfoP">
+								<p>End Time: {activity.endTime}</p>
+							</div>
+							<div className="historyLiInfoP">
+								<p>Tracked Time: {activity.trackedTime} min</p>
+							</div>	
+						</div>
+						<div>
+							<button onClick={addStartActivityFromHistory(activity)}>Start</button>	
+							<button onClick={DeleteUserActivityFromHistory(activity)}>Delete</button>
+						</div>	
                     </li>
 			))}
 			</ul>	

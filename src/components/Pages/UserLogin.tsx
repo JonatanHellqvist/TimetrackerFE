@@ -86,24 +86,49 @@ function UserLogin() {
 		<>
 		  <div>
 			{!loggedInUser && !registerForm ? (
-			  <form onSubmit={handleLogin}>
-				<h2>Login</h2>
-				<label htmlFor="userName">Username</label>
-				<input type="text" id="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required />
-				<label htmlFor="password">Password</label>
-				<input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-				<br />
-				<button type="submit">Logga in</button>
-				<button type="button" onClick={handleShowRegisterForm}>Register</button>
-				{invalidLogin && <h2>Incorrect login info, try again!</h2>}
-			  </form>
+				<div id="loginFormDiv">
+					<form onSubmit={handleLogin} id="loginForm">
+						<div>
+							<h1 id="loginFormH1">Login</h1>
+						</div>
+						<div className="loginFormDivDetails">
+							<div className="loginFormDivDetailsLabel">
+								<label className="loginFormDivDetailsLabelText" htmlFor="userName">Username</label>
+							</div>
+							<div className="oginFormDivDetailsInputDiv">
+								<input className="loginFormDivDetailsInput" type="text" id="userName" value={userName} onChange={(e) => setUsername(e.target.value)} required />
+							</div>
+						</div>
+						<div className="loginFormDivDetails">
+							<div className="loginFormDivDetailsLabel">
+								<label className="loginFormDivDetailsLabelText" htmlFor="password">Password</label>
+							</div>
+							<div className="oginFormDivDetailsInput">
+								<input className="loginFormDivDetailsInput" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+							</div>
+						</div>
+						
+						
+						<br />
+						<div className="loginFormBtnsDiv">
+							<button type="submit">Logga in</button>
+							<button type="button" onClick={handleShowRegisterForm}>Register</button>
+						</div>
+						
+						{invalidLogin && <h2>Incorrect login info, try again!</h2>}
+					</form>
+			  </div>
 			) : null }
 				{registerForm && <UserRegister/>}
 				
 			{loggedInUser && (
 			  <>
-				<h2>Logged in as: {loggedInUser.userName}</h2>
-				<button onClick={handleLogout}>Logout</button>
+			  	<div id="loggedInDiv">
+					<h1 id="loggedInUserH1">Logged in as: {loggedInUser.userName}</h1>
+					<div className="loginFormBtnsDiv">
+					<button onClick={handleLogout}>Logout</button>
+					</div>
+				</div>
 			  </>
 			)}
 		  </div>

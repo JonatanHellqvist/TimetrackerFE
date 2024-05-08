@@ -64,7 +64,7 @@ function UserRegister() {
 		<div>
 			{!loggedInUser ? (
 				<div>
-				 	<h2>Register</h2>
+				 	<h1>Register</h1>
 					<form onSubmit={handleRegister}>
 						<label htmlFor="userName">Username:</label>
 						<input type="text" id="userName" name="userName" required/>

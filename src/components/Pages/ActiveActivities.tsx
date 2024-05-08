@@ -19,7 +19,7 @@ function ActiveActivities() {
 
 	// const [startActivity, setStartActivity] = useState <string | null> (null);
 	// const [stopActivity, setStopActivity] = useState <string | null> (null);
-	
+
 	const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -171,17 +171,33 @@ function ActiveActivities() {
 		})
 	}
 	return (
-		<div>
-			<h1>Active Activites:</h1>
+		<div id="activeActivitiesMainDiv">
+			<div id="activeActivitiesH1Div">
+				<h1 id="activeActivitiesH1">Active Activites</h1>
+			</div>
+			
 			{activityList ? (
-			<ul>
+			<ul id="activeActivitiesUl">
 			{activityList.map(activity => (
-                    <li key={activity.id}>
-                        <h3>{activity.activityName}</h3>
-                        <p>Start Time: {activity.startTime}</p>
-                        <p>End Time: {activity.endTime}</p>
-                        <p>Tracked Time: {activity.trackedTime}</p>
-						<ActivityTimer endTime={activity.endTime} startTime={activity.startTime}/>
+                    <li id="activeActivitiesLi" key={activity.id}>
+						<div id="activeActivitiesLiH3">
+ 							<h3>{activity.activityName}</h3>
+						</div>
+						<div id="activeActivitiesLiInfoDiv">
+							<div className="activeActivitiesLiInfoP">
+								<p>Start Time: {activity.startTime}</p>
+							</div>
+							<div className="activeActivitiesLiInfoP">
+								<p>End Time: {activity.endTime}</p>
+							</div>
+							<div className="activeActivitiesLiInfoP">
+								<p>Tracked Time: {activity.trackedTime}</p>
+							</div>	
+							<div className="activeActivitiesLiInfoP">
+								<ActivityTimer endTime={activity.endTime} startTime={activity.startTime}/>
+							</div>
+						</div>
+						<div id="activeActivitiesBtnsDiv">
 						{!activity.startTime ? (
 							<button onClick={addStartActivity(activity)}>Start</button>
                 		) : activity.endTime ? (
@@ -189,8 +205,11 @@ function ActiveActivities() {
 						) : (
 							<button onClick={addStopActivity(activity)}>Stop</button>
                 		)}
-						<button onClick={() => deleteUserActivity(activity)}>Delete</button>
-						<button onClick={() => moveActivityToHistory(activity)}>Move to History</button>
+						
+							<button onClick={() => deleteUserActivity(activity)}>Delete</button>
+							<button onClick={() => moveActivityToHistory(activity)}>Move to History</button>
+						</div>
+						
                     </li>		
 			))}
 			</ul>
@@ -198,15 +217,23 @@ function ActiveActivities() {
 				<p>Activity List is Empty, Add a new activity</p>
 			)}
 			<div>
-			<h3>Add Activity</h3>
+				<div id="activeActivtiesFormDiv">
+					<div id="activeActivtiesFormDivTitle">
+						<h3 id="activeActivtiesFormDivTitleh3">Add Activity</h3>
+					<div id="activeActivtiesForm">
+						<form onSubmit= {saveNewActivity}>
+							<input type="text" value={addActivity} onChange={((e) => setAddActivity(e.target.value))}>
+							</input>
+							<div id="activeActivtiesFormBtn">
+								<button>Add</button>
+							</div>
+						</form>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
 
-			<form onSubmit= {saveNewActivity}>
-				<input type="text" value={addActivity} onChange={((e) => setAddActivity(e.target.value))}>
-				</input>
-				<button>Add</button>
-			</form>
-		</div>
-		</div>
 	);
 }
 
