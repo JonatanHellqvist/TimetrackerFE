@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Start from "./Start";
+// import Start from "./Start";
 import Admin from "./Admin";
 // import ActivityHistory from "./ActivityHistory";
 // import ActiveActivities from "./ActiveActivities";
@@ -29,8 +29,9 @@ function Menu() {
 			if (getUrl) {
 				pageUrl = getUrl;
 				setPage(getUrl)
+				
 			}  else {
-				pageUrl = "start"	
+				pageUrl = "user"	
 			}
 		} 
 		
@@ -46,7 +47,7 @@ function Menu() {
 		<>
 		
 			<h1>TimeTracker:</h1>
-			<button onClick={() => setPage("start")}>Start</button>
+			{/* <button onClick={() => setPage("start")}>Start</button> */}
 			<button onClick={() => setPage("user")}>User</button>
 			<button onClick={() => setPage("activeactivities")}>Active Activities</button>
 			<button onClick={() => setPage("activityhistory")}>Activity History/Statistics</button>
@@ -56,7 +57,7 @@ function Menu() {
 
 			{
 				{
-					"start": <Start />,
+					// "start": <Start />,
 					"user": <UserLogin />,
 					"activeactivities": <ActiveActivities/>,
 					"activityhistory": <ActivityHistory  />,

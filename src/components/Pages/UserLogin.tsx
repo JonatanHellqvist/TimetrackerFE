@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 //test
 import UserRegister from "./UserRegister";
 
-
 function UserLogin() {
 	interface User {
 		id: string;
@@ -36,7 +35,7 @@ function UserLogin() {
 			setLoggedInUser(JSON.parse(userFromLocalStorage));
 			// setLoginForm(false);
 		}
-	}, [loggedInUser]);
+	}, []);
 
 	const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -56,6 +55,7 @@ function UserLogin() {
 				localStorage.setItem("loggedInUser", JSON.stringify(data));
 				// setLoginForm(false);
 				console.log("Login successfull for User:", (data));	
+				window.location.href = ("?page=user"); //ladda om usersidan
 			}		
 		} else if (res.status === 401){
 			console.log("Invalid username or password")

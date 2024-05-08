@@ -11,7 +11,7 @@ function UserRegister() {
 
 	const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
 	// const [registerForm, setRegisterForm] = useState(false);
-	const [register, setRegister] = useState<User>();
+	// const [register, setRegister] = useState<User | null >(null);
 	const [loginForm, setLoginForm] = useState(false);
 
 	useEffect(() => {
@@ -51,8 +51,9 @@ function UserRegister() {
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log("Registration Sucessfull")
-		setRegister(data);
+			console.log("Registration Sucessfull ", data)
+		// setRegister(data);
+		window.location.href = ("?page=user"); //ladda om sidan
 		setLoginForm(true);
 		})
 		.catch(error => {
