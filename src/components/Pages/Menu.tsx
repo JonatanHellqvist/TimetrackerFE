@@ -53,7 +53,7 @@ function Menu() {
 			<button onClick={() => setPage("activityhistory")}>Activity History/Statistics</button>
 			<button onClick={() => setPage("admin")}>Admin</button>
 
-			<div>Page: {page}</div>
+			{/* <div>Page: {page}</div> */}
 
 			{
 				{

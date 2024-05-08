@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 function ActivityHistory() {
 
 	interface Activity {
-		id: string;
-		activityName: string;
+		id: string ;
+		activityName: string ;
 		startTime: string | null;
 		endTime: string | null;
 		trackedTime: number;
@@ -14,6 +14,8 @@ function ActivityHistory() {
 	
 	const [historyList, setHistoryList] = useState<Activity[] | null>(null);
 	const [startActivityFromHistory, setStartActivityFromHistory] = useState("");
+
+	// const [deleteActivity, setDeleteActivity] = useState<string| null>(null);
 	
 	const getUserIdFromLocalStorage = () => {
 		const loggedInUserString = localStorage.getItem("loggedInUser");
@@ -34,7 +36,7 @@ function ActivityHistory() {
 
 		const id = getUserIdFromLocalStorage();
 
-		if (!id) {
+		if (!id ) {
 			console.error("No userId found in local storage")
 			return;
 		}
@@ -51,15 +53,12 @@ function ActivityHistory() {
 };
 		useEffect(() => {
 			fetchHistoryList();
+			
 	},[]);
-
-
+	
 	const addStartActivityFromHistory = (activity: Activity) =>(e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-	
 		const userId = getUserIdFromLocalStorage();
-		
-
 		fetch(`https://shark-app-fcayz.ondigitalocean.app/activity/startactivity/${userId}/${activity.id}`, {
 			method: "PUT",
 			headers: {
@@ -76,6 +75,27 @@ function ActivityHistory() {
 		});
 	}
 
+	const DeleteUserActivityFromHistory = (activity : Activity) => (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		console.log("DeleteUserActivity called with activity:", activity.id);
+		
+		const userId = getUserIdFromLocalStorage();
+		console.log(userId, activity.id)
+			fetch(`https://shark-app-fcayz.ondigitalocean.app/${userId}/${activity.id}/activityhistory/delete`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			},
+		})
+		.then (() => {
+			// setDeleteActivity(activityId);
+			fetchHistoryList();
+		})
+		.catch(error => {
+			console.error("Error",error);
+		});	
+	}
+
 	return (
 		<div>
 			<h1>Activity History</h1>
@@ -87,7 +107,11 @@ function ActivityHistory() {
                         <p>Start Time: {activity.startTime}</p>
                         <p>End Time: {activity.endTime}</p>
                         <p>Tracked Time: {activity.trackedTime} min</p>
-						<button onClick={addStartActivityFromHistory(activity)}>Start</button>
+						
+						<button onClick={addStartActivityFromHistory(activity)}>Start</button>	
+						<button onClick={DeleteUserActivityFromHistory(activity)}>Delete</button>
+
+						
                     </li>
 			))}
 			</ul>	

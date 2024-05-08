@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ActivityTimer from "./ActivityTimer";
 
 
+
+
 function ActiveActivities() {
 
 	interface Activity {
@@ -18,9 +20,6 @@ function ActiveActivities() {
 	const [startActivity, setStartActivity] = useState <string | null> (null);
 	const [stopActivity, setStopActivity] = useState <string | null> (null);
 	
-
-	// localhost:8080/663941cdba707236dfa1d18c/list/addactivity
-	//ny aktivitet
 	const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -120,6 +119,30 @@ function ActiveActivities() {
 			fetchActivities();
 	},[]);
 
+
+	//delete
+
+	const DeleteUserActivity = (activity: Activity) => {
+		console.log("DeleteUserActivity called with activity:", activity);
+		
+		const userId = getUserIdFromLocalStorage();
+		console.log(userId, activity.id)
+		if (!userId) {
+			console.error("No userId found in local storage")
+			return;
+		}
+		fetch(`https://shark-app-fcayz.ondigitalocean.app/${userId}/${activity.id}/activity/delete`,{
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			}
+		})
+		.then(() => {
+				
+			fetchActivities();
+		})
+	}
+
 	return (
 		<div>
 			<h1>Active Activites:</h1>
@@ -137,6 +160,8 @@ function ActiveActivities() {
                 ) : (
                 <button onClick={addStartActivity(activity)}>Start</button>
                 )}
+				<button onClick={() => DeleteUserActivity(activity)}>Delete</button>
+				<button>Move to History</button>
 			
                     </li>
 					
