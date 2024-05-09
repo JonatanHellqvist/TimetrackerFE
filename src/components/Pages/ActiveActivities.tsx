@@ -20,6 +20,18 @@ function ActiveActivities() {
 	// const [startActivity, setStartActivity] = useState <string | null> (null);
 	// const [stopActivity, setStopActivity] = useState <string | null> (null);
 
+	//formatera tid
+	const formatStartStopTime = (dateTimeString: string | null) => {
+		if (!dateTimeString) return "N/A";
+
+		const date = new Date(dateTimeString);
+
+		date.setHours(date.getHours() +2); //fulfix för att hantera UTC
+		
+		const hours = date.getHours().toString().padStart(2, "0");
+		const minutes = date.getMinutes().toString().padStart(2, "0");
+		return `${hours}:${minutes}`
+	}
 	const saveNewActivity = (e:React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -175,6 +187,33 @@ function ActiveActivities() {
 			<div id="activeActivitiesH1Div">
 				<h1 id="activeActivitiesH1">Active Activites</h1>
 			</div>
+			<div>
+				<div id="activeActivtiesFormDiv">
+					<div id="activeActivtiesFormDivTitle">
+						<h3 id="activeActivtiesFormDivTitleh3">Add Activity</h3>
+						</div>
+					<div id="activeActivtiesForm">
+						<form onSubmit= {saveNewActivity}>
+							<div id="activieFormInfoDiv">
+								<div id="activieFormInfoDivP">
+									<p>Activity Name</p>
+								</div>
+								<div id="activieFormInfoDivInput">
+									<input type="text" placeholder="Type activity name here...." value={addActivity} onChange={((e) => setAddActivity(e.target.value))}>
+								</input>
+								</div>	
+							</div>
+							<div id="activeActivtiesFormBtn">
+								<button>Add</button>
+							</div>
+						</form>
+					</div>
+				</div>	
+			</div>
+
+			<div id="activeActivitiesH1Div">
+				<h1 id="activeActivitiesH1">Your Current Activites</h1>
+			</div>
 			
 			{activityList ? (
 			<ul id="activeActivitiesUl">
@@ -184,14 +223,30 @@ function ActiveActivities() {
  							<h3>{activity.activityName}</h3>
 						</div>
 						<div id="activeActivitiesLiInfoDiv">
-							<div className="activeActivitiesLiInfoP">
-								<p>Start Time: {activity.startTime}</p>
+							<div id="activeActivitiesLiInfoDivTime">
+
+								<div id="activeActivitesLiInfoDivStartTime">	
+										<div id="aStartP">
+											<p>Activity Started</p>
+										</div>
+										<div id="aStartP2">
+											<p>{formatStartStopTime(activity.startTime)}</p>
+										</div>	
+								</div>
+
+								<div id="activeActivitesLiInfoDivStopTime">
+									<div>
+										<p>Activity Stoped</p>
+									</div>
+									<div>
+										<p>{formatStartStopTime(activity.endTime)}</p>
+									</div>
+								</div>
 							</div>
+							
+							
 							<div className="activeActivitiesLiInfoP">
-								<p>End Time: {activity.endTime}</p>
-							</div>
-							<div className="activeActivitiesLiInfoP">
-								<p>Tracked Time: {activity.trackedTime}</p>
+								<p>Total tracked time for Activity: {activity.trackedTime} minutes</p>
 							</div>	
 							<div className="activeActivitiesLiInfoP">
 								<ActivityTimer endTime={activity.endTime} startTime={activity.startTime}/>
@@ -216,23 +271,9 @@ function ActiveActivities() {
 			) : (
 				<p>Activity List is Empty, Add a new activity</p>
 			)}
-			<div>
-				<div id="activeActivtiesFormDiv">
-					<div id="activeActivtiesFormDivTitle">
-						<h3 id="activeActivtiesFormDivTitleh3">Add Activity</h3>
-					<div id="activeActivtiesForm">
-						<form onSubmit= {saveNewActivity}>
-							<input type="text" value={addActivity} onChange={((e) => setAddActivity(e.target.value))}>
-							</input>
-							<div id="activeActivtiesFormBtn">
-								<button>Add</button>
-							</div>
-						</form>
-					</div>
-				</div>	
-			</div>
+			
 		</div>
-	</div>
+	
 
 	);
 }

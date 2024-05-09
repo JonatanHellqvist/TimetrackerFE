@@ -124,7 +124,7 @@ function UserLogin() {
 			{loggedInUser && (
 			  <>
 			  	<div id="loggedInDiv">
-					<h1 id="loggedInUserH1">Logged in as: {loggedInUser.userName}</h1>
+					<h1 id="loggedInUserH1">Logged in as {loggedInUser.userName}</h1>
 					<div className="loginFormBtnsDiv">
 					<button onClick={handleLogout}>Logout</button>
 					</div>

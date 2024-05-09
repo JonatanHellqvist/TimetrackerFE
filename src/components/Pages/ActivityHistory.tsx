@@ -16,6 +16,17 @@ function ActivityHistory() {
 	const [startActivityFromHistory, setStartActivityFromHistory] = useState("");
 
 	// const [deleteActivity, setDeleteActivity] = useState<string| null>(null);
+	const formatStartStopTime = (dateTimeString: string | null) => {
+		if (!dateTimeString) return "N/A";
+
+		const date = new Date(dateTimeString);
+
+		date.setHours(date.getHours() +2); //fulfix för att hantera UTC
+		
+		const hours = date.getHours().toString().padStart(2, "0");
+		const minutes = date.getMinutes().toString().padStart(2, "0");
+		return `${hours}:${minutes}`
+	}
 	
 	const getUserIdFromLocalStorage = () => {
 		const loggedInUserString = localStorage.getItem("loggedInUser");
@@ -107,17 +118,35 @@ function ActivityHistory() {
 							<h3>{activity.activityName}</h3>
 						</div>
                         <div id="historyLiInfoDiv">
-							<div className="historyLiInfoP">
-								<p>Start Time: {activity.startTime}</p>
+
+							<div id="historyLiInfoTimeDiv">
+								<div id="historyLiInfoTimeDivStartTime">
+									
+										<div>
+											<p>Start Time:</p>
+										</div>
+										<div>
+											<p>{formatStartStopTime(activity.startTime)}</p>	
+										</div> 
+									
+								</div>
+									
+								<div id="historyLiInfoTimeDivStopTime">
+									<div>
+										<p>End Time:</p>
+									</div>
+									<div>
+										<p>{formatStartStopTime(activity.endTime)}</p>
+									</div>
+								</div>
 							</div>
+							
+							
 							<div className="historyLiInfoP">
-								<p>End Time: {activity.endTime}</p>
-							</div>
-							<div className="historyLiInfoP">
-								<p>Tracked Time: {activity.trackedTime} min</p>
+								<p>Total tracked time for activity: {activity.trackedTime} min</p>
 							</div>	
 						</div>
-						<div>
+						<div id="historyBtnsDiv">
 							<button onClick={addStartActivityFromHistory(activity)}>Start</button>	
 							<button onClick={DeleteUserActivityFromHistory(activity)}>Delete</button>
 						</div>	

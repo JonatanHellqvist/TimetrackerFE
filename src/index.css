@@ -69,106 +69,161 @@ button:focus-visible {
 }
 
 #headerDiv {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
   margin-bottom: 25px;
 }
 #timeTrackerh1 {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 #headerDiv p {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 #menuBtnsDiv {
-  border: 1px solid greenyellow;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 /*LOGGED IN-----------------------------------------------*/
 #loggedInDiv {
-  border: 1px solid red;
+  border: 1px solid rgb(5, 5, 5);
 }
 #loggedInUserH1 {
-  border: 1px solid greenyellow;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 0.3em;
 }
 /*LOGGED IN FORM*-----------------------------------------------*/
 #loginFormDiv {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 #loginForm {
-  border: 1px solid greenyellow;
+  border: 1px solid rgb(0, 0, 0);
 }
 #loginFormH1 {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 .loginFormDivDetails {
-  border: 1px solid rgb(150, 140, 206);
+  border: 1px solid rgb(0, 0, 0);
 }
 .loginFormDivDetailsLabel {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 .loginFormDivDetailsInput {
-  border: 1px solid rgb(140, 161, 46);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .loginFormDivDetailsLabelText {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 .loginFormBtnsDiv {
-  border: 2px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 /*Active*-----------------------------------------------*/
 #activeActivitiesMainDiv {
   border: 1px solid black;
   padding: 25px;
   padding-top: 0;
+  
 }
 #activeActivitiesDiv {
   border: 1px solid red;
 }
 #activeActivitiesH1 {
-  border: 1px solid red;
+  margin: 0.3em;
+  /* border: 5px solid red; */
 }
 #activeActivitiesUl {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   list-style: none;
   padding:0;
+  margin-top: 0;
+  
+  
 }
 #activeActivitiesLi{
-  border: 1px solid red;
+  /* border: 5px solid red; */
+  margin-bottom: 0.5em;
+  
 }
 #activeActivitiesBtnsDiv {
-  border: 3px solid rgb(6, 27, 211);
+  border: 1px solid rgb(0, 0, 0);
 }
 #activeActivitiesLiH3 {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
+  border-bottom: none;
+  padding-bottom: 1em;
+  
 }
 #activeActivitiesLiH3 h3{
-  border: 1px solid rgb(0, 230, 247);
+  margin-bottom: 0;
+  /* border: 1px solid rgb(0, 230, 247); */
 }
 #activeActivitiesLiInfoDiv{
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
+  border-bottom: none;
 }
 
 .activeActivitiesLiInfoP {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
+  
+}
+#activeActivitesLiInfoDivStartTime {
+  column-count: 2;
+  column-gap: 0;
+}
+#activeActivitesLiInfoDivStartTime > div{
+  border: 1px solid rgb(0, 0, 0);
+  break-inside: avoid-column;
+}
+
+#activeActivitiesLiInfoDivTime {
+  /* border: 1px solid white; */
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+#activeActivitesLiInfoDivStopTime {
+  column-count: 2;
+  column-gap: 0;
+}
+#activeActivitesLiInfoDivStopTime > div{
+  border: 1px solid rgb(0, 0, 0);
+  break-inside: avoid-column;
+  height: 100%;
 }
 .activeActivitiesLiInfoP p{
-  border: 1px solid rgb(0, 255, 42);
+  /* border: 1px solid rgb(0, 255, 42); */
 }
+
+/* FORM */
 #activeActivtiesFormDiv {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 #activeActivtiesFormDivTitle {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
 }
 #activeActivtiesForm {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 #activeActivtiesFormBtn {
-  border: 1px solid rgb(214, 252, 2);
+  /* border: 1px solid rgb(214, 252, 2); */
 }
 #activeActivtiesFormDivTitleh3{
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
+#activieFormInfoDiv {
+display: flex;
+}
+#activieFormInfoDivP {
+  border: 1px solid rgb(0, 0, 0);
+  flex-grow: 1;
+  flex-basis: 50%;
+}
+
+#activieFormInfoDivInput {
+  align-content: center;
+  border: 1px solid rgb(0, 0, 0);
+  flex-grow: 1;
+  flex-basis: 50%;
+}
+
 /*Active*-------------------------------------------------------------------------------*/
 
 /*History*------------------------------------------------------------------------------*/
@@ -178,31 +233,64 @@ button:focus-visible {
   padding-top: 0;
 }
 #historyH1 {
-  border: 1px solid red;
+  margin: 0.3em;
+  /* border: 1px solid red; */
 }
 #historyUl{
-  border: 1px solid red;
+  /* border: 1px solid red; */
   list-style: none;
   padding: 0;
+  margin-top: 0;
 }
 #historyLi{
-  border: 1px solid rgb(214, 252, 2);
+  /* border: 1px solid rgb(214, 252, 2); */
+  margin-bottom: 0.5em;
   
 }
 #historyLiH3{
-  border: 1px solid rgb(214, 252, 2);
+  border: 1px solid rgb(0, 0, 0);
+  border-bottom: none;
+  padding-bottom: 1em;
 }
 #historyLiH3 h3 {
-  border: 1px solid red;
+  margin-bottom: 0;
+  /* border: 1px solid red; */
 }
 #historyLiInfoDiv {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
+  border-bottom: none;
 }
 .historyLiInfoP {
-  border: 1px solid rgb(45, 199, 58);
+  border: 1px solid rgb(0, 0, 0);
+  
 }
-.historyLiInfoP p {
-  border: 1px solid white;
+
+#historyLiInfoTimeDiv{
+  border: 1px solid rgb(0, 0, 0);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+#historyLiInfoTimeDivStartTime{
+  column-count: 2;
+  column-gap: 0;
+}
+#historyLiInfoTimeDivStartTime > div{
+  border: 1px solid rgb(0, 0, 0);
+  break-inside: avoid-column;
+}
+#historyLiInfoTimeDivStopTime{
+  column-count: 2;
+  column-gap: 0;
+}
+#historyLiInfoTimeDivStopTime > div{
+  border: 1px solid rgb(0, 0, 0);
+  break-inside: avoid-column;
+}
+.historyLiInfoP {
+ /* border: 1px solid black; */
+}
+#historyBtnsDiv {
+  border: 1px solid black;
 }
 
 /*History*------------------------------------------------------------------------------*/
@@ -215,41 +303,45 @@ button:focus-visible {
   padding-top: 0;
 }
 #adminH1Div {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 #adminH1 {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin-bottom: 0;
   margin-top: 0.3rem;
 }
 #adminInfoH2Div {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 #adminInfoH2 {
-  border: 1px solid red;
+  text-decoration: underline;
+  /* border: 1px solid red; */
 }
 #adminUl {
-  border: 1px solid rgb(45, 199, 58);
+  /* border: 1px solid rgb(45, 199, 58); */
   list-style: none;
   padding: 0;
 }
 #adminLi {
-  border: 1px solid rgb(45, 199, 58);
+  margin-bottom: 0.5em;
+  /* border: 1px solid rgb(45, 199, 58); */
 }
 #adminLiInfoDiv {
-  border: 3px solid red;
+  border: 1px solid rgb(0, 0, 0);
   /* display: grid; */
 }
 #adminLiInfoUser {
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
   column-count: 2;
+  column-gap: 0;
+  
 }
 #adminLiInfoUser > div{
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
   break-inside: avoid-column;
 }
 #adminLiInfoTime {
-  border: 3px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 
