@@ -12,6 +12,7 @@ function ActiveActivities() {
 		startTime: string | null;
 		endTime: string | null;
 		trackedTime: string | null;
+		totalTrackedTime: string | null;
 	}
 
 	const [activityList, setActivityList] = useState<Activity[] |null>(null);
@@ -246,7 +247,7 @@ function ActiveActivities() {
 							
 							
 							<div className="activeActivitiesLiInfoP">
-								<p>Total tracked time for Activity: {activity.trackedTime} minutes</p>
+								<p>Total tracked time for Activity: {activity.totalTrackedTime} minutes</p>
 							</div>	
 							<div className="activeActivitiesLiInfoP">
 								<ActivityTimer endTime={activity.endTime} startTime={activity.startTime}/>

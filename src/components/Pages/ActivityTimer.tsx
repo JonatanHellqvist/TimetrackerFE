@@ -12,7 +12,7 @@ function ActivityTimer( { startTime, endTime } : { startTime : string | null; en
 			intervalId = setInterval(() => {	
                 const currentTime = new Date().getTime();
                 const elapsedTimeMs = currentTime - startTimestamp;
-                const elapsedMinutes = Math.floor(elapsedTimeMs / 60000 -121); // Beräkna antal minuter //--------> mongolösning för utc -121 TODO formatera tidsformatet <---------
+                const elapsedMinutes = Math.floor(elapsedTimeMs / 60000 -120); // Beräkna antal minuter //--------> mongolösning för utc -120 TODO formatera tidsformatet <---------
 				console.log(elapsedTimeMs / 60000)
                 setTimedTime(elapsedMinutes);
             }, 1000);

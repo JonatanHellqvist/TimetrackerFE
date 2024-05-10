@@ -270,6 +270,14 @@ display: flex;
   display: grid;
   grid-template-rows: 1fr 1fr;
 }
+#historyLiInfoDivDate {
+  column-count: 2;
+  column-gap: 0;
+}
+#historyLiInfoDivDate >div {
+  border: 1px solid rgb(0, 0, 0);
+  break-inside: avoid-column;
+}
 #historyLiInfoTimeDivStartTime{
   column-count: 2;
   column-gap: 0;

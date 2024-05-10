@@ -9,13 +9,49 @@ function ActivityHistory() {
 		activityName: string ;
 		startTime: string | null;
 		endTime: string | null;
-		trackedTime: number;
+		trackedTime: number | null;
+		totalTrackedTime: number | null;
 	}
 	
 	const [historyList, setHistoryList] = useState<Activity[] | null>(null);
 	const [startActivityFromHistory, setStartActivityFromHistory] = useState("");
+	const [sortBy, setSortBy] = useState<string>("name");
 
 	// const [deleteActivity, setDeleteActivity] = useState<string| null>(null);
+
+	const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortBy(event.target.value);
+		console.log(event.target.value);
+        sortActivities(event.target.value);
+		console.log(event.target.value);
+    };
+
+	const sortActivities = (criteria: string) => {
+
+		if (!historyList || !Array.isArray(historyList)) {
+			return;
+		}
+		const sortedActivities = [...historyList];
+        if (criteria === "name") {
+            sortedActivities.sort((a, b) => a.activityName.localeCompare(b.activityName));
+        } else if (criteria === "date") {
+            sortedActivities.sort((a,b) => {
+				const dateA = a.endTime? new Date(a.endTime).getTime() : 0;
+				const dateB = b.endTime? new Date(b.endTime).getTime() :0;
+				return dateA - dateB;
+			})
+        } else if (criteria === "trackedTime") {
+			sortedActivities.sort((a,b) => {
+				const trackedTimeA = a.totalTrackedTime !== null ? a.totalTrackedTime : 0;
+            	const trackedTimeB = b.totalTrackedTime !== null ? b.totalTrackedTime : 0;
+
+				return trackedTimeB - trackedTimeA;
+		});
+		
+    }
+	setHistoryList(sortedActivities);
+};
+
 	const formatStartStopTime = (dateTimeString: string | null) => {
 		if (!dateTimeString) return "N/A";
 
@@ -28,6 +64,12 @@ function ActivityHistory() {
 		return `${hours}:${minutes}`
 	}
 	
+	//substring för datum
+	const formatDate = (dateTimeString: string | null) => {
+		if (!dateTimeString) return "N/A";
+		return dateTimeString.substring(0,10)
+	}
+
 	const getUserIdFromLocalStorage = () => {
 		const loggedInUserString = localStorage.getItem("loggedInUser");
 
@@ -109,6 +151,14 @@ function ActivityHistory() {
 			<div id="historyH1Div">
 				<h1 id="historyH1">Activity History</h1>
 			</div>
+			<div>
+				<label htmlFor="sort">Sort by:</label>
+				<select id="sort" value={sortBy} onChange={handleSortChange}>
+					<option value="name">Name</option>
+					<option value="date">Date</option>
+					<option value="trackedTime">TrackedTime</option>
+				</select>
+			</div>
 			
 			{historyList ? (
 			<ul id="historyUl">
@@ -120,8 +170,15 @@ function ActivityHistory() {
                         <div id="historyLiInfoDiv">
 
 							<div id="historyLiInfoTimeDiv">
+								<div id="historyLiInfoDivDate">
+									<div>
+										<p>Date of last tracking:</p>
+									</div>
+									<div>
+										<p>{formatDate(activity.startTime)}</p>
+									</div>
+								</div>
 								<div id="historyLiInfoTimeDivStartTime">
-									
 										<div>
 											<p>Start Time:</p>
 										</div>
@@ -143,7 +200,7 @@ function ActivityHistory() {
 							
 							
 							<div className="historyLiInfoP">
-								<p>Total tracked time for activity: {activity.trackedTime} min</p>
+								<p>Total tracked time for activity: {activity.totalTrackedTime} min</p>
 							</div>	
 						</div>
 						<div id="historyBtnsDiv">
@@ -159,5 +216,6 @@ function ActivityHistory() {
 		</div>
 	);
 }
+
 
 export default ActivityHistory;
