@@ -219,7 +219,7 @@ function ActiveActivities() {
 			{activityList ? (
 			<ul id="activeActivitiesUl">
 			{activityList.map(activity => (
-                    <li id="activeActivitiesLi" key={activity.id}>
+                    <li id="activeActivitiesLi" key={activity.id} data-starttime={activity.startTime} data-stoptime={activity.endTime}>
 						<div id="activeActivitiesLiH3">
  							<h3>{activity.activityName}</h3>
 						</div>
@@ -236,10 +236,10 @@ function ActiveActivities() {
 								</div>
 
 								<div id="activeActivitesLiInfoDivStopTime">
-									<div>
-										<p>Activity Stoped</p>
+									<div id="aStopP">
+										<p >Activity Stoped</p>
 									</div>
-									<div>
+									<div id="aStopP2">
 										<p>{formatStartStopTime(activity.endTime)}</p>
 									</div>
 								</div>

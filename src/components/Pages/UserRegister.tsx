@@ -63,17 +63,41 @@ function UserRegister() {
 	return (
 		<div>
 			{!loggedInUser ? (
-				<div>
+				<div id="registerForm">
 				 	<h1>Register</h1>
+					<div>
+						<div>
+							<div>
+								<div>
+									<label htmlFor="userName">Username:</label>
+								</div>
+								<div>
+									<input type="text" id="userName" name="userName" required/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<label htmlFor="password">Password:</label>
+								</div>
+								<div>
+									<input type="password" id="password" name="password" required/>										
+								</div>																
+							</div>
+						</div>
+						<div>
+
+						</div>
+						<div>
+
+						</div>
+					</div>
 					<form onSubmit={handleRegister}>
-						<label htmlFor="userName">Username:</label>
-						<input type="text" id="userName" name="userName" required/>
-				
-						<label htmlFor="password">Password:</label>
-						<input type="password" id="password" name="password" required/>
-				 		<br />
-				 		<button type="submit">Register</button>
-						<button type="button" onClick={handleShowLoginForm}>Cancel</button>
+						
+				 		<div id="registerBtns">
+							<button type="submit">Register</button>
+							<button type="button" onClick={handleShowLoginForm}>Cancel</button>
+						</div>
+				 		
 					</form>
 				</div>
 			) : null}	

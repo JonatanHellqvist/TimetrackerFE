@@ -171,35 +171,35 @@ function ActivityHistory() {
 
 							<div id="historyLiInfoTimeDiv">
 								<div id="historyLiInfoDivDate">
-									<div>
+									<div id="hDateP">
 										<p>Date of last tracking:</p>
 									</div>
-									<div>
+									<div id="hDateP2">
 										<p>{formatDate(activity.startTime)}</p>
 									</div>
 								</div>
 								<div id="historyLiInfoTimeDivStartTime">
-										<div>
+										<div id="hStartP">
 											<p>Start Time:</p>
 										</div>
-										<div>
+										<div id="hStartP2">
 											<p>{formatStartStopTime(activity.startTime)}</p>	
 										</div> 
 									
 								</div>
 									
 								<div id="historyLiInfoTimeDivStopTime">
-									<div>
+									<div id="hStopP">
 										<p>End Time:</p>
 									</div>
-									<div>
+									<div id="hStopP2">
 										<p>{formatStartStopTime(activity.endTime)}</p>
 									</div>
 								</div>
 							</div>
 							
 							
-							<div className="historyLiInfoP">
+							<div id="historyLiInfoTrackedTime">
 								<p>Total tracked time for activity: {activity.totalTrackedTime} min</p>
 							</div>	
 						</div>

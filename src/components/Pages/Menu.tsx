@@ -39,6 +39,7 @@ function Menu() {
 
 	return (
 		<>
+			<div id="MainDiv">
 			<div id="headerDiv">
 				<h1 id="timeTrackerh1">TimeTracker</h1>
 				<p>Track your activites with TimeTracker!</p>
@@ -49,6 +50,7 @@ function Menu() {
 				<button onClick={() => setPage("activityhistory")}>Activity History/Statistics</button>
 				<button onClick={() => setPage("admin")}>Admin</button>
 			</div>
+			
 			{
 				{
 					// "start": <Start />,
@@ -58,7 +60,7 @@ function Menu() {
 					"admin": <Admin/>,
 				} [page]
 			}
-
+		</div>
 		</>	
 	);
 }

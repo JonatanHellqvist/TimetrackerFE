@@ -48,10 +48,10 @@ function Admin() {
 								<li id="adminLi"key={user.id}>
 									<div id="adminLiInfoDiv">
 										<div id="adminLiInfoUser">
-											<div>
+											<div id="aUserP">
 												<p>Username:</p>
 											</div>
-											<div>
+											<div id="aUserP2">
 												<p>{user.userName}</p>
 											</div>
 										</div>
@@ -66,7 +66,10 @@ function Admin() {
 						
 				</div>
 			) : (
-				<h1>Get admin acess to show this page</h1>
+				<div id="notAdminMsgDiv">
+					<h1>Get admin acess to show this page</h1>
+				</div>
+				
 			)}
 			
 		</div>
