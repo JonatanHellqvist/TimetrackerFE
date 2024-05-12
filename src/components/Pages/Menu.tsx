@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
-// import Start from "./Start";
 import Admin from "./Admin";
-// import ActivityHistory from "./ActivityHistory";
-// import ActiveActivities from "./ActiveActivities";
-// import User from "./User";
-// import PrintActivites from "../PrintActivites";
-import ActivityHistory from "./ActivityHistory";
-import ActiveActivities from "./ActiveActivities";
+import ActivityHistory from "../Activity/ActivityHistory";
+import ActiveActivities from "../Activity/ActiveActivities";
 import UserLogin from "./UserLogin";
 
 function Menu() {
@@ -49,11 +44,9 @@ function Menu() {
 				<button onClick={() => setPage("activeactivities")}>Active Activities</button>
 				<button onClick={() => setPage("activityhistory")}>Activity History/Statistics</button>
 				<button onClick={() => setPage("admin")}>Admin</button>
-			</div>
-			
+			</div>			
 			{
 				{
-					// "start": <Start />,
 					"user": <UserLogin />,
 					"activeactivities": <ActiveActivities/>,
 					"activityhistory": <ActivityHistory  />,

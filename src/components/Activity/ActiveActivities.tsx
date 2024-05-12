@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import ActivityTimer from "./ActivityTimer";
-
-
-
+import ActivityTimer from "../Activity/ActivityTimer";
 
 function ActiveActivities() {
 
@@ -17,9 +14,6 @@ function ActiveActivities() {
 
 	const [activityList, setActivityList] = useState<Activity[] |null>(null);
 	const [addActivity, setAddActivity] = useState<string>("")
-
-	// const [startActivity, setStartActivity] = useState <string | null> (null);
-	// const [stopActivity, setStopActivity] = useState <string | null> (null);
 
 	//formatera tid
 	const formatStartStopTime = (dateTimeString: string | null) => {
@@ -65,7 +59,6 @@ function ActiveActivities() {
 			},
 			})
 				.then(() => {
-					// setStartActivity(null);
 					fetchActivities();
 				})
 				.catch(error => {
@@ -80,7 +73,6 @@ function ActiveActivities() {
 				body: JSON.stringify({ startTime: new Date().toISOString() })
 			})
 				.then(() => {
-					// setStartActivity(null);
 					fetchActivities();
 				})
 				.catch(error => {
@@ -101,7 +93,6 @@ function ActiveActivities() {
 			body: JSON.stringify({ stopTime: new Date().toISOString()})
 		})
 		.then(() => {
-			// setStopActivity("");
 			fetchActivities();
 		})
 		.catch(error => {
@@ -122,7 +113,6 @@ function ActiveActivities() {
 		return null; 
 	  };
 
-	//@GetMapping ("/{userId}/list/")
 	const fetchActivities = () => {
 
 		const id = getUserIdFromLocalStorage();
@@ -234,7 +224,6 @@ function ActiveActivities() {
 											<p>{formatStartStopTime(activity.startTime)}</p>
 										</div>	
 								</div>
-
 								<div id="activeActivitesLiInfoDivStopTime">
 									<div id="aStopP">
 										<p >Activity Stoped</p>
@@ -244,8 +233,6 @@ function ActiveActivities() {
 									</div>
 								</div>
 							</div>
-							
-							
 							<div className="activeActivitiesLiInfoP">
 								<p>Total tracked time for Activity: {activity.totalTrackedTime} minutes</p>
 							</div>	
@@ -264,18 +251,14 @@ function ActiveActivities() {
 						
 							<button onClick={() => deleteUserActivity(activity)}>Delete</button>
 							<button onClick={() => moveActivityToHistory(activity)}>Move to History</button>
-						</div>
-						
+						</div>						
                     </li>		
 			))}
 			</ul>
 			) : (
 				<p>Activity List is Empty, Add a new activity</p>
-			)}
-			
-		</div>
-	
-
+			)}			
+		</div>	
 	);
 }
 

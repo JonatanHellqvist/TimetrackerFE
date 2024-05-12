@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import UserLogin from "./UserLogin";
 
 function UserRegister() {
 
@@ -10,8 +9,6 @@ function UserRegister() {
 	}
 
 	const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
-	// const [registerForm, setRegisterForm] = useState(false);
-	// const [register, setRegister] = useState<User | null >(null);
 	const [loginForm, setLoginForm] = useState(false);
 
 	useEffect(() => {
@@ -22,13 +19,9 @@ function UserRegister() {
 		const userFromLocalStorage = localStorage.getItem("loggedInUser");
 		if (userFromLocalStorage) {
 			setLoggedInUser(JSON.parse(userFromLocalStorage));
-			// setLoginForm(false);
 		}
 	}, [loggedInUser]);
 
-	// const handleRegisterForm = () => {
-	// 	setRegisterForm(true);
-	// }
 	const handleShowLoginForm = () => {
         setLoginForm(true);
 		console.log(loginForm)
@@ -37,10 +30,8 @@ function UserRegister() {
 	const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		//
 		const userName = e.currentTarget.userName.value;
         const password = e.currentTarget.password.value;
-		//
 
 		fetch("https://shark-app-fcayz.ondigitalocean.app/user", {
 		method: "POST",
@@ -85,19 +76,15 @@ function UserRegister() {
 							</div>
 						</div>
 						<div>
-
 						</div>
 						<div>
-
 						</div>
 					</div>
-					<form onSubmit={handleRegister}>
-						
+					<form onSubmit={handleRegister}>						
 				 		<div id="registerBtns">
 							<button type="submit">Register</button>
 							<button type="button" onClick={handleShowLoginForm}>Cancel</button>
-						</div>
-				 		
+						</div>				 		
 					</form>
 				</div>
 			) : null}	

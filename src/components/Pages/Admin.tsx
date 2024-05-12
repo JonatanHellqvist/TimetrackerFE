@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import User from "./User";
 
 function Admin() {
 
@@ -32,7 +31,6 @@ function Admin() {
 			fetchUsers();
 	},[]);
 
-
 	return (
 		<div>
 			{loggedInUser && loggedInUser.admin ? (
@@ -62,16 +60,13 @@ function Admin() {
 										 
 								</li>
 							))}
-						</ul>
-						
+						</ul>						
 				</div>
 			) : (
 				<div id="notAdminMsgDiv">
 					<h1>Get admin acess to show this page</h1>
-				</div>
-				
-			)}
-			
+				</div>				
+			)}			
 		</div>
 	);
 }

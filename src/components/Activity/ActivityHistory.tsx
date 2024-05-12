@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import PrintActivites from "../PrintActivites";
-
 
 function ActivityHistory() {
 
@@ -17,8 +15,6 @@ function ActivityHistory() {
 	const [startActivityFromHistory, setStartActivityFromHistory] = useState("");
 	const [sortBy, setSortBy] = useState<string>("name");
 
-	// const [deleteActivity, setDeleteActivity] = useState<string| null>(null);
-
 	const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortBy(event.target.value);
 		console.log(event.target.value);
@@ -31,13 +27,13 @@ function ActivityHistory() {
 		if (!historyList || !Array.isArray(historyList)) {
 			return;
 		}
-		const sortedActivities = [...historyList];
+		let sortedActivities = [...historyList];
         if (criteria === "name") {
             sortedActivities.sort((a, b) => a.activityName.localeCompare(b.activityName));
         } else if (criteria === "date") {
             sortedActivities.sort((a,b) => {
 				const dateA = a.endTime? new Date(a.endTime).getTime() : 0;
-				const dateB = b.endTime? new Date(b.endTime).getTime() :0;
+				const dateB = b.endTime? new Date(b.endTime).getTime() : 0;
 				return dateA - dateB;
 			})
         } else if (criteria === "trackedTime") {
@@ -46,9 +42,15 @@ function ActivityHistory() {
             	const trackedTimeB = b.totalTrackedTime !== null ? b.totalTrackedTime : 0;
 
 				return trackedTimeB - trackedTimeA;
-		});
-		
-    }
+		})
+		} else if (criteria ==="lastWeek"){
+			const sevenDaysAgo = new Date();
+			sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+			sortedActivities = sortedActivities.filter(activity => {
+				const activityEndTime = activity.endTime ? new Date(activity.endTime) : null;
+				return activityEndTime && activityEndTime >= sevenDaysAgo;
+			});	
+    	}
 	setHistoryList(sortedActivities);
 };
 
@@ -138,7 +140,6 @@ function ActivityHistory() {
 			},
 		})
 		.then (() => {
-			// setDeleteActivity(activityId);
 			fetchHistoryList();
 		})
 		.catch(error => {
@@ -154,9 +155,10 @@ function ActivityHistory() {
 			<div>
 				<label htmlFor="sort">Sort by:</label>
 				<select id="sort" value={sortBy} onChange={handleSortChange}>
+					<option value="lastWeek">Last seven days</option>
 					<option value="name">Name</option>
 					<option value="date">Date</option>
-					<option value="trackedTime">TrackedTime</option>
+					<option value="trackedTime">TrackedTime</option>	
 				</select>
 			</div>
 			
@@ -184,10 +186,8 @@ function ActivityHistory() {
 										</div>
 										<div id="hStartP2">
 											<p>{formatStartStopTime(activity.startTime)}</p>	
-										</div> 
-									
-								</div>
-									
+										</div> 									
+								</div>									
 								<div id="historyLiInfoTimeDivStopTime">
 									<div id="hStopP">
 										<p>End Time:</p>
@@ -196,9 +196,7 @@ function ActivityHistory() {
 										<p>{formatStartStopTime(activity.endTime)}</p>
 									</div>
 								</div>
-							</div>
-							
-							
+							</div>														
 							<div id="historyLiInfoTrackedTime">
 								<p>Total tracked time for activity: {activity.totalTrackedTime} min</p>
 							</div>	

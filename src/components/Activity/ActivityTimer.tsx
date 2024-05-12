@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 function ActivityTimer( { startTime, endTime } : { startTime : string | null; endTime: string | null}) {
 	const [timedTime, setTimedTime] = useState<number>(0);
 
@@ -21,7 +20,6 @@ function ActivityTimer( { startTime, endTime } : { startTime : string | null; en
 			if (intervalId) clearInterval(intervalId);
 	};
 },[startTime,endTime]);
-
 	return (
 		<div>
 			<p>Elapsed Time: {timedTime} min</p>

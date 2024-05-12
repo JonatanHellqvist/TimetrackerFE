@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-
-
-//test
 import UserRegister from "./UserRegister";
 
 function UserLogin() {
@@ -12,18 +9,10 @@ function UserLogin() {
 	}
 
 	const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
-	// const [loginForm, setLoginForm] = useState(true);
 	const [invalidLogin, setInvalidLogin] = useState(false);
 	const [userName, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-
-	//test
 	const [registerForm, setRegisterForm] = useState(false);
-
-	// const handleloginForm = () => {
-	// 	setLoginForm(true);
-		
-	// };
 
 	useEffect(() => {
 		console.log(registerForm);
@@ -33,7 +22,6 @@ function UserLogin() {
 		const userFromLocalStorage = localStorage.getItem("loggedInUser");
 		if (userFromLocalStorage) {
 			setLoggedInUser(JSON.parse(userFromLocalStorage));
-			// setLoginForm(false);
 		}
 	}, []);
 
@@ -53,34 +41,27 @@ function UserLogin() {
 			if(data) {
 				setLoggedInUser(data.user)
 				localStorage.setItem("loggedInUser", JSON.stringify(data));
-				// setLoginForm(false);
 				console.log("Login successfull for User:", (data));	
 				window.location.href = ("?page=user"); //ladda om usersidan
 			}		
 		} else if (res.status === 401){
 			console.log("Invalid username or password")
 			setInvalidLogin(true);
-			// setLoginForm(true);
 		} else {
 			console.log("Login failed")
 		}
 		
 	} 
 
-	//test
-
 	const handleShowRegisterForm = () => {
         setRegisterForm(true);
 		console.log(registerForm)
     };
 
-	/////////
 	const handleLogout = () => {
 		setLoggedInUser(null);
 		localStorage.removeItem("loggedInUser");
-		// setLoginForm(true);
 	};
-	////////////
 	
 	return (
 		<>
@@ -106,9 +87,7 @@ function UserLogin() {
 							<div className="oginFormDivDetailsInput">
 								<input className="loginFormDivDetailsInput" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 							</div>
-						</div>
-						
-						
+						</div>												
 						<br />
 						<div className="loginFormBtnsDiv">
 							<button type="submit">Logga in</button>
