@@ -30,9 +30,16 @@ function UserRegister() {
 	const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const userName = e.currentTarget.userName.value;
-        const password = e.currentTarget.password.value;
+		// "type assortions"
 
+		const target = e.currentTarget as typeof e.currentTarget &  {
+			userName : {value: string };
+			password : {value: string };
+	
+		}
+		const userName = target.userName.value;
+		const password = target.password.value;
+		
 		fetch("https://shark-app-fcayz.ondigitalocean.app/user", {
 		method: "POST",
 		headers: {
@@ -44,7 +51,7 @@ function UserRegister() {
 		.then(data => {
 			console.log("Registration Sucessfull ", data)
 		// setRegister(data);
-		window.location.href = ("?page=user"); //ladda om sidan
+		// window.location.href = ("?page=user"); //ladda om sidan
 		setLoginForm(true);
 		})
 		.catch(error => {
