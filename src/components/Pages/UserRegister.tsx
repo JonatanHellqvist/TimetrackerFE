@@ -51,7 +51,7 @@ function UserRegister() {
 		.then(data => {
 			console.log("Registration Sucessfull ", data)
 		// setRegister(data);
-		// window.location.href = ("?page=user"); //ladda om sidan
+		window.location.href = ("?page=user"); //ladda om sidan
 		setLoginForm(true);
 		})
 		.catch(error => {
@@ -63,7 +63,20 @@ function UserRegister() {
 			{!loggedInUser ? (
 				<div id="registerForm">
 				 	<h1>Register</h1>
-					{/* @@@@@@@@@@@@@@@@ | KUL MISS | @@@@@@@@@@@@@@@@@@2 */}
+
+{/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */}
+{/*  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/}
+				
+					{/* |  KUL MISS  | 
+
+					tror jag drog hela formet runt submit knappen bara tidigare..
+
+					efter att jag "städade upp koden" och splittade login och register till egna komponenter
+					så missade jag tydligen detta, tror formet hamnade bara runt submit knappen | */}
+
+{/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */}
+{/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */}
+
 					<form onSubmit={handleRegister}>
 						<div>
 							<div>
