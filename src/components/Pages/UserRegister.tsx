@@ -63,35 +63,36 @@ function UserRegister() {
 			{!loggedInUser ? (
 				<div id="registerForm">
 				 	<h1>Register</h1>
-					<div>
+					{/* @@@@@@@@@@@@@@@@ | KUL MISS | @@@@@@@@@@@@@@@@@@2 */}
+					<form onSubmit={handleRegister}>
 						<div>
 							<div>
 								<div>
-									<label htmlFor="userName">Username:</label>
+									<div>
+										<label htmlFor="userName">Username:</label>
+									</div>
+									<div>
+										<input type="text" id="userName" name="userName" required/>
+									</div>
 								</div>
 								<div>
-									<input type="text" id="userName" name="userName" required/>
+									<div>
+										<label htmlFor="password">Password:</label>
+									</div>
+									<div>
+										<input type="password" id="password" name="password" required/>										
+									</div>																
 								</div>
 							</div>
 							<div>
-								<div>
-									<label htmlFor="password">Password:</label>
-								</div>
-								<div>
-									<input type="password" id="password" name="password" required/>										
-								</div>																
 							</div>
-						</div>
-						<div>
-						</div>
-						<div>
-						</div>
-					</div>
-					<form onSubmit={handleRegister}>						
-				 		<div id="registerBtns">
-							<button type="submit">Register</button>
-							<button type="button" onClick={handleShowLoginForm}>Cancel</button>
-						</div>				 		
+							<div>
+							</div>
+						</div>					
+							<div id="registerBtns">
+								<button type="submit">Register</button>
+								<button type="button" onClick={handleShowLoginForm}>Cancel</button>
+							</div>				 		
 					</form>
 				</div>
 			) : null}	
